@@ -37,21 +37,29 @@ public class PlayerAttackScript : MonoBehaviour
         {
             // 1st attack
             // anim play
+            movementScript.verticalVelocity = 0;
             canCombo = false;
             recoveryTime = 0.3f;
             attackCancelTime = 0.15f;
             Debug.Log("1st attack!");
-            attackCount++;
         }
 
         if(attackCount == 1 && canCombo)
         {
             //2nd attack
+            movementScript.verticalVelocity = 0;
             canCombo = false;
             recoveryTime = 0.5f;
             attackCancelTime = 0.5f;
             Debug.Log("2nd attack!");
-            attackCount++;
+        }
+
+        attackCount++;
+
+
+        if (movementScript.moveDirection.sqrMagnitude > 0.001f)
+        {
+            transform.rotation = Quaternion.LookRotation(movementScript.moveDirection);
         }
     }
 

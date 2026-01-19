@@ -4,8 +4,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
-
-    [SerializeField] private float rotationSpeed = 180f;
+    [SerializeField] private float gravity;
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float jumpHeight;
 
     private CharacterController controller;
 
@@ -15,11 +16,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
 
     private Vector2 moveInput;
-    private bool isGrounded;
+    [SerializeField] private bool isGrounded;
     private bool canEnemyStep;
+    private bool isWalking;
+
     
 
     private PlayerAttackScript attakScript;
+
+    public Vector3 moveDirection;
+    public float verticalVelocity;
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -28,9 +34,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && isGrounded)
+        if (ctx.performed)
         {
-            //JUMP
+            if(isGrounded)
+            Jump();
         }
     }
 
@@ -44,7 +51,19 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         Movement();
+        if (moveInput.sqrMagnitude < 0.01f ? isWalking = false : isWalking = true) ;
+
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundLayer);
+
+        if (isGrounded && verticalVelocity < 0f)
+        {
+            verticalVelocity = -2f;
+        }
+
+        verticalVelocity += gravity * Time.deltaTime;
+
+        Vector3 velocity = new Vector3(0f, verticalVelocity, 0f);
+        controller.Move(velocity * Time.deltaTime);
     }
 
     private void Movement()
@@ -63,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
         camRight.Normalize();
 
         // Calculate movement direction
-        Vector3 moveDirection = camForward * moveInput.y + camRight * moveInput.x;
+        moveDirection = camForward * moveInput.y + camRight * moveInput.x;
 
         if (attakScript.isInRecovery)
             return;
@@ -74,5 +93,11 @@ public class PlayerMovement : MonoBehaviour
         // Rotate towards movement direction
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    private void Jump()
+    {
+        Debug.Log("Jumped!");
+        verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
     }
 }

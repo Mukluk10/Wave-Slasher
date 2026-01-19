@@ -207,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.25340143, y: 0, z: 0, w: 0.9673612}
-  m_LocalPosition: {x: 0, y: 3.4099998, z: -4}
+  m_LocalPosition: {x: 0, y: 3.26, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 1205262086}
   - component: {fileID: 1205262085}
   - component: {fileID: 1205262084}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,7 +715,7 @@ Transform:
   m_GameObject: {fileID: 1750408289}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.16, z: 0}
+  m_LocalPosition: {x: 0, y: 1.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -761,7 +761,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  gravity: -30
   rotationSpeed: 50
+  jumpHeight: 2.5
   cam: {fileID: 2062058826}
   groundCheck: {fileID: 423797796}
   groundLayer:
@@ -770,6 +772,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  isGrounded: 0
+  moveDirection: {x: 0, y: 0, z: 0}
+  verticalVelocity: 0
 --- !u!114 &1750408293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1277,7 +1282,7 @@ Transform:
   m_GameObject: {fileID: 2062058820}
   serializedVersion: 2
   m_LocalRotation: {x: 0.2534014, y: 0, z: 0, w: 0.9673613}
-  m_LocalPosition: {x: 0, y: 3.4099998, z: -4}
+  m_LocalPosition: {x: 0, y: 3.26, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
