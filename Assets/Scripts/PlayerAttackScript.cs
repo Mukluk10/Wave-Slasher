@@ -17,7 +17,10 @@ public class PlayerAttackScript : MonoBehaviour
     {
         if (ctx.performed)
         {
-            BasicAttack();
+            if (movementScript.isGrounded)
+                BasicAttack();
+            else
+                AirAttack();
         }
     }
     private void Awake()
@@ -37,7 +40,6 @@ public class PlayerAttackScript : MonoBehaviour
         {
             // 1st attack
             // anim play
-            movementScript.verticalVelocity = 0;
             canCombo = false;
             recoveryTime = 0.3f;
             attackCancelTime = 0.15f;
@@ -47,7 +49,6 @@ public class PlayerAttackScript : MonoBehaviour
         if(attackCount == 1 && canCombo)
         {
             //2nd attack
-            movementScript.verticalVelocity = 0;
             canCombo = false;
             recoveryTime = 0.5f;
             attackCancelTime = 0.5f;
@@ -55,6 +56,37 @@ public class PlayerAttackScript : MonoBehaviour
         }
 
         attackCount++;
+
+
+        if (movementScript.moveDirection.sqrMagnitude > 0.001f)
+        {
+            transform.rotation = Quaternion.LookRotation(movementScript.moveDirection);
+        }
+    }
+
+    private void AirAttack()
+    {
+        if (attackCount == 0 && !isInRecovery)
+        {
+            // 1st attack
+            // anim play
+            movementScript.verticalVelocity = 5;
+            canCombo = false;
+            recoveryTime = 0.3f;
+            attackCancelTime = 0.15f;
+        }
+
+        if (attackCount == 1 && canCombo)
+        {
+            //2nd attack
+            movementScript.verticalVelocity = 5;
+            canCombo = false;
+            recoveryTime = 0.5f;
+            attackCancelTime = 0.5f;
+        }
+
+        attackCount++;
+        Debug.Log("Air Attack");
 
 
         if (movementScript.moveDirection.sqrMagnitude > 0.001f)

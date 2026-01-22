@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,8 +8,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float gravity;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float jumpHeight;
+    [SerializeField] private float enemyStepHeight;
+
+    private float maxDashSpeed;
+    [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashDistance;
 
     private CharacterController controller;
+    private PlayerAttackScript attakScript;
 
     [SerializeField] private Transform cam;
     [SerializeField] private Transform groundCheck;
@@ -16,28 +23,43 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
 
     private Vector2 moveInput;
-    [SerializeField] private bool isGrounded;
+    private Vector3 dashDirection;
     private bool canEnemyStep;
     private bool isWalking;
 
     
 
-    private PlayerAttackScript attakScript;
-
+    public bool isGrounded;
     public Vector3 moveDirection;
     public float verticalVelocity;
+    public bool isDashing;
 
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
 
+    public void OnDash(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            if (isGrounded && !attakScript.isInRecovery && !isDashing)
+            {
+                dashDirection = moveDirection.sqrMagnitude > 0.01f ? moveDirection.normalized : transform.forward;
+                StartCoroutine(Dash());
+            }
+        }
+    }
+
     public void OnJump(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
-            if(isGrounded)
+            if(isGrounded && !attakScript.isInRecovery)
             Jump();
+
+            if (canEnemyStep)
+                EnemyStep();
         }
     }
 
@@ -45,20 +67,22 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         attakScript = GetComponent<PlayerAttackScript>();
+        maxDashSpeed = dashSpeed;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         Movement();
         if (moveInput.sqrMagnitude < 0.01f ? isWalking = false : isWalking = true) ;
 
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundLayer);
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, groundLayer);
 
         if (isGrounded && verticalVelocity < 0f)
         {
             verticalVelocity = -2f;
         }
+
+
 
         verticalVelocity += gravity * Time.deltaTime;
 
@@ -84,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         // Calculate movement direction
         moveDirection = camForward * moveInput.y + camRight * moveInput.x;
 
-        if (attakScript.isInRecovery)
+        if (attakScript.isInRecovery || isDashing)
             return;
 
         // Move the character
@@ -99,5 +123,35 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("Jumped!");
         verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+    }
+
+    private void EnemyStep()
+    {
+        Debug.Log("EnemyStep");
+        verticalVelocity = Mathf.Sqrt(enemyStepHeight * -2f * gravity);
+    }
+
+    private IEnumerator Dash()
+    {
+        isDashing = true;
+        attakScript.isInRecovery = true;
+
+        float dashTime = dashDistance / dashSpeed;
+        float elapsed = 0f;
+
+        while(elapsed < dashTime)
+        {
+            controller.Move(dashDirection * dashSpeed * Time.deltaTime);
+            elapsed += Time.deltaTime;
+            dashSpeed -= 65f * Time.deltaTime;
+
+            yield return null;
+        }
+
+        isDashing = false;
+        attakScript.isInRecovery = false;
+        dashSpeed = maxDashSpeed;
+
+        Debug.Log("Dash!");
     }
 }
