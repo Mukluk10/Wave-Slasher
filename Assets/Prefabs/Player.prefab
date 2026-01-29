@@ -185,8 +185,8 @@ GameObject:
   - component: {fileID: 4208789419611399389}
   - component: {fileID: 4118500137748417469}
   - component: {fileID: 832945322090463291}
+  - component: {fileID: 417507071578432589}
   - component: {fileID: 9220780024772743028}
-  - component: {fileID: 6547970882014594283}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -379,7 +379,7 @@ MonoBehaviour:
   jumpHeight: 2.5
   enemyStepHeight: 1
   dashSpeed: 20
-  dashDistance: 0.25
+  dashDistance: 6
   cam: {fileID: 0}
   groundCheck: {fileID: 2426279909004647445}
   groundLayer:
@@ -407,6 +407,19 @@ MonoBehaviour:
   recoveryTime: 0
   attackCancelTime: 0
   isInRecovery: 0
+--- !u!114 &417507071578432589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8589426853563390093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 916361346a61636439d395d1f81ad1c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!143 &9220780024772743028
 CharacterController:
   m_ObjectHideFlags: 0
@@ -431,29 +444,6 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &6547970882014594283
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8589426853563390093}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8851424554830859424
 GameObject:
