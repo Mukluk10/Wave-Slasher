@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class WaveSystem : MonoBehaviour
@@ -8,11 +9,15 @@ public class WaveSystem : MonoBehaviour
 
     [SerializeField] private int enemyCount;
     public int enemiesKilled;
-    private int waveCount;
-    private int spawnedEnemies;
-    [SerializeField] private float timeBetweenWaves;
+    [SerializeField] private int spawnedEnemies;
 
+    [SerializeField] private int waveCount;
+    [SerializeField] private float timeBetweenWaves;
+    [SerializeField] private float timeBetweenEnemies;
     [SerializeField] private bool inDownTime;
+
+    private bool spawningEnemy;
+    private bool waveIsStarted;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -20,16 +25,20 @@ public class WaveSystem : MonoBehaviour
         StartCoroutine(WaveDowntime());
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!inDownTime)
         {
-            for (spawnedEnemies = 0; spawnedEnemies < enemyCount; spawnedEnemies++)
+            if (spawnedEnemies < enemyCount && !spawningEnemy)
             {
-                Debug.Log("EnemySpawned");
+                StartCoroutine(SpawnEnemyDelay());
             }
+        }
 
+        if(enemiesKilled == spawnedEnemies && waveIsStarted)
+        {
             inDownTime = true;
+            waveIsStarted = false;
             StartCoroutine(WaveDowntime());
         }
     }
@@ -38,6 +47,8 @@ public class WaveSystem : MonoBehaviour
     {
         waveCount++;
         enemyCount += 3;
+        enemiesKilled = 0;
+        spawnedEnemies = 0;
         inDownTime = false;
     }
 
@@ -47,4 +58,13 @@ public class WaveSystem : MonoBehaviour
         WaveStart();
     }
 
+    private IEnumerator SpawnEnemyDelay()
+    {
+        spawningEnemy = true;
+        yield return new WaitForSeconds(timeBetweenEnemies);
+        Debug.Log("EnemySpawned");
+        spawnedEnemies++;
+        spawningEnemy = false;
+        waveIsStarted = true;
+    }
 }

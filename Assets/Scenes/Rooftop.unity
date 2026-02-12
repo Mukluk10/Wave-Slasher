@@ -1719,9 +1719,12 @@ MonoBehaviour:
   - {fileID: 897497636}
   enemiesToSpawm:
   - {fileID: 4283122198143077251, guid: 85d9c9abe338160409bb928353cba362, type: 3}
-  enemyCount: 3
+  enemyCount: 1
   enemiesKilled: 0
+  spawnedEnemies: 0
+  waveCount: 0
   timeBetweenWaves: 5
+  timeBetweenEnemies: 3
   inDownTime: 1
 --- !u!4 &1643122980
 Transform:
