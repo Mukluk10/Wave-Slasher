@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private Animator anim;
 
     private Vector2 moveInput;
     private Vector3 dashDirection;
@@ -82,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
             verticalVelocity = -2f;
         }
 
-
+        anim.SetBool("Moving", isWalking);
 
         verticalVelocity += gravity * Time.deltaTime;
 
