@@ -123,7 +123,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        Debug.Log("Jumped!");
         anim.SetTrigger("Jump");
         verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
     }
@@ -154,7 +153,5 @@ public class PlayerMovement : MonoBehaviour
         isDashing = false;
         attakScript.isInRecovery = false;
         dashSpeed = maxDashSpeed;
-
-        Debug.Log("Dash!");
     }
 }

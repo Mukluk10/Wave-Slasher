@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyHitbox : MonoBehaviour
+public class Hitbox : MonoBehaviour
 {
     public int damage;
     public Vector3 knockback;
