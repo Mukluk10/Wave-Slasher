@@ -84,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         anim.SetBool("Moving", isWalking);
+        anim.SetBool("Grounded", isGrounded);
 
         verticalVelocity += gravity * Time.deltaTime;
 
@@ -123,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         Debug.Log("Jumped!");
+        anim.SetTrigger("Jump");
         verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
     }
 

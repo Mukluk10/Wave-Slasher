@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using UnityEngine.EventSystems;
 
 public class PlayerAttackScript : MonoBehaviour
 {
@@ -11,7 +13,14 @@ public class PlayerAttackScript : MonoBehaviour
     public bool isInRecovery;
     private bool canCombo;
 
+    private CharacterController controller;
     private PlayerMovement movementScript;
+    private Animator anim;
+
+    [SerializeField] private float momentumSpeed;
+    [SerializeField] private float momentumDistance;
+    private float maxMomentumSpeed;
+    private Vector3 momentumDirection;
 
     public void OnAttack (InputAction.CallbackContext ctx)
     {
@@ -26,21 +35,24 @@ public class PlayerAttackScript : MonoBehaviour
     private void Awake()
     {
         movementScript = GetComponent<PlayerMovement>();
+        anim = GetComponentInChildren<Animator>();
+        controller = GetComponent<CharacterController>();
+        maxMomentumSpeed = momentumSpeed;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        anim.SetBool("Recovery", isInRecovery);
     }
 
     private void BasicAttack()
     {
         if(attackCount == 0 && !isInRecovery)
         {
-            // 1st attack
-            // anim play
+            anim.SetTrigger("Attack");
             canCombo = false;
+            attackCount++;
+            ApplyMomentum();
             recoveryTime = 0.3f;
             attackCancelTime = 0.15f;
             Debug.Log("1st attack!");
@@ -48,14 +60,36 @@ public class PlayerAttackScript : MonoBehaviour
 
         if(attackCount == 1 && canCombo)
         {
-            //2nd attack
+            anim.SetTrigger("Attack");
             canCombo = false;
-            recoveryTime = 0.5f;
-            attackCancelTime = 0.5f;
+            attackCount++;
+            ApplyMomentum();
+            recoveryTime = 0.3f;
+            attackCancelTime = 0.15f;
             Debug.Log("2nd attack!");
         }
 
-        attackCount++;
+        if (attackCount == 2 && canCombo)
+        {
+            anim.SetTrigger("Attack");
+            canCombo = false;
+            attackCount++;
+            ApplyMomentum();
+            recoveryTime = 0.3f;
+            attackCancelTime = 0.15f;
+            Debug.Log("3rd attack!");
+        }
+
+        if (attackCount == 3 && canCombo)
+        {
+            anim.SetTrigger("Attack");
+            canCombo = false;
+            attackCount++;
+            ApplyMomentum();
+            recoveryTime = 0.5f;
+            attackCancelTime = 0.5f;
+            Debug.Log("4th attack!");
+        }
 
 
         if (movementScript.moveDirection.sqrMagnitude > 0.001f)
@@ -68,26 +102,23 @@ public class PlayerAttackScript : MonoBehaviour
     {
         if (attackCount == 0 && !isInRecovery)
         {
-            // 1st attack
-            // anim play
+            anim.SetTrigger("Attack");
             movementScript.verticalVelocity = 5;
             canCombo = false;
+            attackCount++;
             recoveryTime = 0.3f;
             attackCancelTime = 0.15f;
         }
 
         if (attackCount == 1 && canCombo)
         {
-            //2nd attack
+            anim.SetTrigger("Attack");
             movementScript.verticalVelocity = 5;
             canCombo = false;
+            attackCount++;
             recoveryTime = 0.5f;
             attackCancelTime = 0.5f;
         }
-
-        attackCount++;
-        Debug.Log("Air Attack");
-
 
         if (movementScript.moveDirection.sqrMagnitude > 0.001f)
         {
@@ -117,5 +148,27 @@ public class PlayerAttackScript : MonoBehaviour
         {
             canCombo = true;
         }
+    }
+
+    private IEnumerator AttackMomentum()
+    {
+        float dashTime = momentumDistance / momentumSpeed;
+        float elapsed = 0f;
+
+        while (elapsed < dashTime)
+        {
+            controller.Move(momentumDirection * momentumSpeed * Time.deltaTime);
+            elapsed += Time.deltaTime;
+            momentumSpeed -= 65f * Time.deltaTime;
+
+            yield return null;
+        }
+        momentumSpeed = maxMomentumSpeed;
+    }
+
+    private void ApplyMomentum()
+    {
+        momentumDirection = movementScript.moveDirection.sqrMagnitude > 0.01f ? movementScript.moveDirection.normalized : transform.forward;
+        StartCoroutine(AttackMomentum());
     }
 }
