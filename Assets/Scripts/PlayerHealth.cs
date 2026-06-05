@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
 
     private PlayerMovement movementScript;
     private PlayerAttackScript attakScript;
+    private Animator anim;
 
     private float iFrameTime = 0.1f;
     private bool isInIframe;
@@ -17,6 +18,7 @@ public class PlayerHealth : MonoBehaviour
         maxHealth = health;
         movementScript = GetComponent<PlayerMovement>();
         attakScript = GetComponent<PlayerAttackScript>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,6 +28,8 @@ public class PlayerHealth : MonoBehaviour
             Hitbox hitBox = other.GetComponent<Hitbox>();
             health -= hitBox.damage;
             Debug.Log("Took Damage: " + hitBox.damage);
+            anim.SetTrigger("Damage");
+            attakScript.recoveryTime = 0.5f;
             isInIframe = true;
             StartCoroutine(Invinciblity());
         }

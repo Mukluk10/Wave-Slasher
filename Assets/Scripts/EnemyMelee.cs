@@ -9,7 +9,10 @@ public class EnemyMelee : MonoBehaviour
 
     [SerializeField] private bool inReadyDistance;
     [SerializeField] private bool readyToAttack;
+    public float recoveryTime;
+    private bool isInRecovery;
     private bool attacking;
+    private bool isMoving;
 
     private NavMeshAgent agent;
 
@@ -18,8 +21,12 @@ public class EnemyMelee : MonoBehaviour
     [SerializeField] private float attackRange;
     [SerializeField] private float distance;
 
+    [SerializeField] private int attackCount;
+
     [SerializeField] private bool canBeJuggled;
     [SerializeField] private bool canBeKnockedBack;
+
+    [SerializeField] private Animator anim;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -29,7 +36,7 @@ public class EnemyMelee : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(player != null)
+        if(player != null && !isInRecovery)
         {
             agent.SetDestination(player.transform.position);
         }
@@ -46,11 +53,20 @@ public class EnemyMelee : MonoBehaviour
             LostReadyDistance();
         }
 
-        if(distance < attackRange && readyToAttack)
+        if(distance < attackRange && readyToAttack && !isInRecovery)
         {
             Attack();
         }
-        
+
+        if (recoveryTime > 0)
+        {
+            recoveryTime -= 1 * Time.fixedDeltaTime;
+            isInRecovery = true;
+        }
+        else
+        {
+            isInRecovery = false;
+        }
     }
 
     private void Update()
@@ -61,6 +77,13 @@ public class EnemyMelee : MonoBehaviour
             Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
             transform.rotation = rotation;
         }
+
+        if (agent.speed > 0.01f)
+            isMoving = true;
+        else
+            isMoving = false;
+
+        anim.SetBool("Moving", isMoving);
     }
     private void IsReadyDistance()
     {
@@ -91,7 +114,8 @@ public class EnemyMelee : MonoBehaviour
     private void Attack()
     {
         Debug.Log("EnemyMeleeAttacked");
-        //Attack
+        //Random attack somehow
+        Attack1();
     }
 
     private IEnumerator AttackTimeDivergence()
@@ -99,5 +123,11 @@ public class EnemyMelee : MonoBehaviour
         float randomAttackTime = Random.Range(0.5f, 2f);
         yield return new WaitForSeconds(randomAttackTime);
         GoingToAttack();
+    }
+
+    private void Attack1()
+    {
+        anim.SetTrigger("Attack");
+        recoveryTime = 1f;
     }
 }

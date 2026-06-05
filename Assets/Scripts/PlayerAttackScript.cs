@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
-using UnityEngine.EventSystems;
 
 public class PlayerAttackScript : MonoBehaviour
 {
-    [SerializeField] private float recoveryTime;
+    public float recoveryTime;
     [SerializeField] private float attackCancelTime;
 
     private int attackCount;
