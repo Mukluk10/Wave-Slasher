@@ -1384,6 +1384,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyTestMelee
       objectReference: {fileID: 0}
+    - target: {fileID: 4283122198143077251, guid: 85d9c9abe338160409bb928353cba362, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8950462698058984997, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.05
@@ -1948,7 +1952,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1643122979
 MonoBehaviour:
   m_ObjectHideFlags: 0

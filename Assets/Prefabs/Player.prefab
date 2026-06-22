@@ -2227,7 +2227,19 @@ MonoBehaviour:
     m_ActionId: 4d6297f3-2dbf-478e-a39b-06ad5474c578
     m_ActionName: 'Player/Dash[/Keyboard/leftShift]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3239522019239188735}
+        m_TargetAssemblyTypeName: PlayerBlock, Assembly-CSharp
+        m_MethodName: OnBlock
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 18366dec-9899-4d8a-98ef-672cc5723966
     m_ActionName: 'Player/Block[/SwitchProControllerHID/leftTrigger,/Keyboard/ctrl]'
   m_NeverAutoSwitchControlSchemes: 0
@@ -2310,7 +2322,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocking: 0
-  anim: {fileID: 0}
 --- !u!143 &9220780024772743028
 CharacterController:
   m_ObjectHideFlags: 0

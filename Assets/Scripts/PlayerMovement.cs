@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController controller;
     private PlayerAttackScript attakScript;
+    private PlayerBlock blockScript;
 
     [SerializeField] private Transform cam;
     [SerializeField] private Transform groundCheck;
@@ -68,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         attakScript = GetComponent<PlayerAttackScript>();
+        blockScript = GetComponent<PlayerBlock>();
         maxDashSpeed = dashSpeed;
     }
 
@@ -111,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
         // Calculate movement direction
         moveDirection = camForward * moveInput.y + camRight * moveInput.x;
 
-        if (attakScript.isInRecovery || isDashing)
+        if (attakScript.isInRecovery || isDashing || blockScript.isBlocking)
             return;
 
         // Move the character
@@ -126,6 +128,7 @@ public class PlayerMovement : MonoBehaviour
     {
         anim.SetTrigger("Jump");
         verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        blockScript.StopBlocking();
     }
 
     private void EnemyStep()
@@ -137,7 +140,8 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator Dash()
     {
         isDashing = true;
-        attakScript.isInRecovery = true;
+        attakScript.recoveryTime = 0.5f;
+        blockScript.StopBlocking();
 
         float dashTime = dashDistance / dashSpeed;
         float elapsed = 0f;
@@ -152,7 +156,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isDashing = false;
-        attakScript.isInRecovery = false;
         dashSpeed = maxDashSpeed;
     }
 }

@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
 
     private PlayerMovement movementScript;
     private PlayerAttackScript attakScript;
+    private PlayerBlock blockScript;
     private Animator anim;
 
     private float iFrameTime = 0.1f;
@@ -18,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
         maxHealth = health;
         movementScript = GetComponent<PlayerMovement>();
         attakScript = GetComponent<PlayerAttackScript>();
+        blockScript = GetComponent<PlayerBlock>();
         anim = GetComponentInChildren<Animator>();
     }
 
@@ -25,13 +27,20 @@ public class PlayerHealth : MonoBehaviour
     {
         if (other.CompareTag("EnemyAttack") && !isInIframe)
         {
-            Hitbox hitBox = other.GetComponent<Hitbox>();
-            health -= hitBox.damage;
-            Debug.Log("Took Damage: " + hitBox.damage);
-            anim.SetTrigger("Damage");
-            attakScript.recoveryTime = 0.5f;
-            isInIframe = true;
-            StartCoroutine(Invinciblity());
+            if (!blockScript.isBlocking)
+            {
+                Hitbox hitBox = other.GetComponent<Hitbox>();
+                health -= hitBox.damage;
+                Debug.Log("Took Damage: " + hitBox.damage);
+                anim.SetTrigger("Damage");
+                attakScript.recoveryTime = 0.2f;
+                isInIframe = true;
+                StartCoroutine(Invinciblity());
+            }
+            else
+            {
+                //Blocked attack;
+            }
         }
     }
 

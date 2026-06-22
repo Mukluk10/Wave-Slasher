@@ -14,6 +14,7 @@ public class PlayerAttackScript : MonoBehaviour
 
     private CharacterController controller;
     private PlayerMovement movementScript;
+    private PlayerBlock blockScript;
     private Animator anim;
 
     [SerializeField] private float momentumSpeed;
@@ -25,10 +26,17 @@ public class PlayerAttackScript : MonoBehaviour
     {
         if (ctx.performed)
         {
-            if (movementScript.isGrounded)
-                BasicAttack();
+            if (!blockScript.isBlocking)
+            {
+                if (movementScript.isGrounded)
+                    BasicAttack();
+                else
+                    AirAttack();
+            }
             else
-                AirAttack();
+            {
+                //Counter???
+            }
         }
     }
     private void Awake()
@@ -36,6 +44,7 @@ public class PlayerAttackScript : MonoBehaviour
         movementScript = GetComponent<PlayerMovement>();
         anim = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
+        blockScript = GetComponent<PlayerBlock>();
         maxMomentumSpeed = momentumSpeed;
     }
 
@@ -54,7 +63,6 @@ public class PlayerAttackScript : MonoBehaviour
             ApplyMomentum();
             recoveryTime = 0.3f;
             attackCancelTime = 0.15f;
-            Debug.Log("1st attack!");
         }
 
         if(attackCount == 1 && canCombo)
@@ -65,7 +73,6 @@ public class PlayerAttackScript : MonoBehaviour
             ApplyMomentum();
             recoveryTime = 0.3f;
             attackCancelTime = 0.15f;
-            Debug.Log("2nd attack!");
         }
 
         if (attackCount == 2 && canCombo)
@@ -76,7 +83,6 @@ public class PlayerAttackScript : MonoBehaviour
             ApplyMomentum();
             recoveryTime = 0.3f;
             attackCancelTime = 0.15f;
-            Debug.Log("3rd attack!");
         }
 
         if (attackCount == 3 && canCombo)
@@ -87,7 +93,6 @@ public class PlayerAttackScript : MonoBehaviour
             ApplyMomentum();
             recoveryTime = 0.5f;
             attackCancelTime = 0.5f;
-            Debug.Log("4th attack!");
         }
 
 

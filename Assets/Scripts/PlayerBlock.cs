@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,8 @@ public class PlayerBlock : MonoBehaviour
     private PlayerAttackScript attackScript;
 
     private bool canGuardBuffer;
+    private bool isPressingBlock;
+    private bool isInBlockRecovery;
     public bool isBlocking;
 
     private Animator anim;
@@ -14,39 +17,53 @@ public class PlayerBlock : MonoBehaviour
     {
         if (ctx.performed)
         {
-            if (movementScript.isGrounded)
-                Block();
+            isPressingBlock = true;
         }
         if (ctx.canceled)
         {
-            if (movementScript.isGrounded)
-                StopBlocking();
+            isPressingBlock = false;
         }
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    private void Awake()
     {
         movementScript = GetComponent<PlayerMovement>();
         attackScript = GetComponent<PlayerAttackScript>();
         anim = GetComponentInChildren<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        if (!attackScript.isInRecovery && isPressingBlock && movementScript.isGrounded && !isBlocking && !isInBlockRecovery && !movementScript.isDashing)
+        {
+            Block();
+        }
+
+        if(isBlocking && !isPressingBlock)
+        {
+            StopBlocking();
+        }
+
         anim.SetBool("Blocking", isBlocking);
     }
 
     private void Block()
     {
-        if (!attackScript.isInRecovery)
-        {
-            isBlocking = true;
-        }
+        Debug.Log("blocking");
+        isBlocking = true;
     }
 
     public void StopBlocking()
     {
+        Debug.Log("stop blocking");
+        isInBlockRecovery = true;
         isBlocking = false;
+        StartCoroutine(BlockRecovery());
+    }
+
+    private IEnumerator BlockRecovery()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isInBlockRecovery = false;
     }
 }
