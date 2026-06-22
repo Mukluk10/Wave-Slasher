@@ -74,6 +74,7 @@ public class EnemyMelee : MonoBehaviour
         if (inReadyDistance && !attacking)
         {
             Vector3 relativePos = player.transform.position - transform.position;
+            relativePos.y = 0f;
             Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
             transform.rotation = rotation;
         }

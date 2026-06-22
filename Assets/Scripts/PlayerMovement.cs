@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     
 
     public bool isGrounded;
+    private bool isOnEnemy;
     public Vector3 moveDirection;
     public float verticalVelocity;
     public bool isDashing;
@@ -79,10 +80,21 @@ public class PlayerMovement : MonoBehaviour
         if (moveInput.sqrMagnitude < 0.01f ? isWalking = false : isWalking = true) ;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, groundLayer);
+        isOnEnemy = Physics.CheckSphere(groundCheck.position, 0.3f, enemyLayer);
 
         if (isGrounded && verticalVelocity < 0f)
         {
             verticalVelocity = -2f;
+        }
+
+        if (isOnEnemy)
+        {
+            controller.Move(moveDirection * 10f * Time.deltaTime);
+            canEnemyStep = true;
+        }
+        else
+        {
+            canEnemyStep = false;
         }
 
         anim.SetBool("Moving", isWalking);
