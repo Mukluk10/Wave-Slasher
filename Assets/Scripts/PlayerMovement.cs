@@ -85,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
         anim.SetBool("Moving", isWalking);
         anim.SetBool("Grounded", isGrounded);
+        anim.SetBool("Dodging", isDashing);
 
         verticalVelocity += gravity * Time.deltaTime;
 

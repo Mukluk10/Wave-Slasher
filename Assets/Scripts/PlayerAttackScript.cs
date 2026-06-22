@@ -115,8 +115,8 @@ public class PlayerAttackScript : MonoBehaviour
             movementScript.verticalVelocity = 5;
             canCombo = false;
             attackCount++;
-            recoveryTime = 0.5f;
-            attackCancelTime = 0.5f;
+            recoveryTime = 0.3f;
+            attackCancelTime = 0.3f;
         }
 
         if (movementScript.moveDirection.sqrMagnitude > 0.001f)
