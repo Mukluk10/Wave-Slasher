@@ -152,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator Dash()
     {
         isDashing = true;
-        attakScript.recoveryTime = 0.5f;
+        attakScript.recoveryTime = 0.4f;
         blockScript.StopBlocking();
 
         float dashTime = dashDistance / dashSpeed;

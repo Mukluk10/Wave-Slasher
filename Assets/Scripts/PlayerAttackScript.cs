@@ -43,6 +43,20 @@ public class PlayerAttackScript : MonoBehaviour
             }
         }
     }
+
+    public void OnSpecial (InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            if (!blockScript.isBlocking)
+            {
+                if (movementScript.isGrounded)
+                    SpecialAttack();
+                else
+                    AirSpecial();
+            }
+        }
+    }
     private void Awake()
     {
         movementScript = GetComponent<PlayerMovement>();
@@ -143,6 +157,40 @@ public class PlayerAttackScript : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(movementScript.moveDirection);
         }
+    }
+
+    private void SpecialAttack()
+    {
+        FindClosestEnemy();
+
+        if (movementScript.moveDirection.sqrMagnitude > 0.5f)
+        {
+            transform.rotation = Quaternion.LookRotation(movementScript.moveDirection);
+        }
+        else
+        {
+            Debug.Log("AutoLockOn");
+            if (currentTarget != null)
+            {
+                attackDir = currentTarget.position - transform.position;
+                attackDir.y = 0f;
+                transform.rotation = Quaternion.LookRotation(attackDir);
+            }
+        }
+
+        if (attackCount == 1 && canCombo)
+        {
+            anim.SetTrigger("Special");
+            canCombo = false;
+            ApplyMomentum();
+            recoveryTime = 0.4f;
+            attackCancelTime = 0.4f;
+        }
+    }
+
+    private void AirSpecial()
+    {
+
     }
 
     private void FindClosestEnemy()

@@ -352,6 +352,7 @@ MonoBehaviour:
   damage: 5
   knockback: {x: 0, y: 0, z: 0}
   isKnockback: 0
+  isJuggle: 0
 --- !u!1 &401208035
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +465,7 @@ MonoBehaviour:
   damage: 10
   knockback: {x: 0, y: 0, z: 0}
   isKnockback: 0
+  isJuggle: 0
 --- !u!65 &416040610
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -817,7 +819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4283122198143077251, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8950462698058984997, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1120,6 +1122,7 @@ MonoBehaviour:
   damage: 1
   knockback: {x: 0, y: 0, z: 0}
   isKnockback: 0
+  isJuggle: 0
 --- !u!54 &1064504622
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1407,6 +1410,14 @@ PrefabInstance:
     - target: {fileID: 4415037775006892633, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.2427151
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377580132104361371, guid: 85d9c9abe338160409bb928353cba362, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377580132104361371, guid: 85d9c9abe338160409bb928353cba362, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5502980114715112648, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_LocalPosition.x

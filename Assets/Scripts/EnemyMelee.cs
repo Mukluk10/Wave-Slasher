@@ -28,16 +28,23 @@ public class EnemyMelee : MonoBehaviour
     [SerializeField] private float knockBackTime;
 
     [SerializeField] private Animator anim;
+
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundLayer;
+    private bool isGrounded;
+    private Rigidbody rb;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player");
         agent.speed = moveSpeed;
     }
 
     private void FixedUpdate()
     {
-        if(player != null && !isInRecovery)
+        if(player != null && !isInRecovery && !isOTG && !isAirStunned)
         {
             agent.SetDestination(player.transform.position);
         }
@@ -72,6 +79,8 @@ public class EnemyMelee : MonoBehaviour
 
     private void Update()
     {
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, groundLayer);
+
         if (inReadyDistance && !attacking)
         {
             Vector3 relativePos = player.transform.position - transform.position;
@@ -80,6 +89,11 @@ public class EnemyMelee : MonoBehaviour
                 return;
             Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
             transform.rotation = rotation;
+        }
+
+        if(isGrounded && isAirStunned)
+        {
+            KnockDown();
         }
 
         if (agent.speed > 0.01f)
@@ -112,12 +126,10 @@ public class EnemyMelee : MonoBehaviour
     {
         agent.speed = moveSpeed;
         readyToAttack = true;
-        //Debug.Log("Going to attack");
     }
 
     private void Attack()
     {
-        //Debug.Log("EnemyMeleeAttacked");
         //Random attack somehow
         Attack1();
     }
@@ -137,11 +149,27 @@ public class EnemyMelee : MonoBehaviour
 
     public void AirKnockBack()
     {
-
+        if (isGrounded)
+        {
+            isOTG = false;
+            agent.enabled = false;
+            rb.isKinematic = false;
+            rb.AddForce(transform.up * 5f, ForceMode.Impulse);
+            isAirStunned = true;
+            recoveryTime = 99999;
+            StopAllCoroutines();
+        }
+        else
+        {
+            rb.AddForce(transform.up * 5f, ForceMode.Impulse);
+        }
     }
 
     public void KnockDown()
     {
+        agent.enabled = true;
+        rb.isKinematic = true;
+        isAirStunned = false;
         isOTG = true;
         recoveryTime = knockBackTime;
         anim.SetTrigger("KnockDown");

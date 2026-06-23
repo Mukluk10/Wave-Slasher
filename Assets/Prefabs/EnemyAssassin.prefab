@@ -88,6 +88,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2518220714354587267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3686559862294542445}
+  m_Layer: 7
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3686559862294542445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2518220714354587267}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8950462698058984997}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4283122198143077251
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,8 +134,9 @@ GameObject:
   - component: {fileID: 968062186909847403}
   - component: {fileID: 272909970404096093}
   - component: {fileID: 6608969569195368231}
+  - component: {fileID: 5377580132104361371}
   m_Layer: 7
-  m_Name: EnemyTestMelee
+  m_Name: EnemyAssassin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,6 +156,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8214880174815254809}
+  - {fileID: 3686559862294542445}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4889011806448942398
@@ -182,6 +215,10 @@ MonoBehaviour:
   attackCount: 0
   knockBackTime: 1.5
   anim: {fileID: 6608969569195368231}
+  groundCheck: {fileID: 3686559862294542445}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &968062186909847403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,8 +233,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 15
   iFrameTime: 0
-  canBeJuggled: 0
-  canBeKnockedBack: 0
+  canBeJuggled: 1
+  canBeKnockedBack: 1
 --- !u!195 &272909970404096093
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -242,6 +279,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &5377580132104361371
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283122198143077251}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &7646903938889629086
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,6 +462,7 @@ MonoBehaviour:
   damage: 5
   knockback: {x: 0, y: 0, z: 0}
   isKnockback: 0
+  isJuggle: 0
 --- !u!1001 &8470044410422132466
 PrefabInstance:
   m_ObjectHideFlags: 0

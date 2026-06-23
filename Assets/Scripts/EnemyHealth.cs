@@ -39,25 +39,27 @@ public class EnemyHealth : MonoBehaviour
             if (hitBox.isKnockback)
             {
                 enemyMelee.KnockDown();
-                isInIframe = true;
-                StartCoroutine(Invinciblity());
             }
             if (!hitBox.isKnockback)
             {
                 if (enemyMelee.isOTG)
                 {
                     enemyMelee.KnockDown();
-                    isInIframe = true;
-                    StartCoroutine(Invinciblity());
                 }
                 else
                 {
                     enemyMelee.recoveryTime = 0.5f;
                     anim.SetTrigger("Damage");
-                    isInIframe = true;
-                    StartCoroutine(Invinciblity());
                 }
             }
+            if (hitBox.isJuggle)
+            {
+                enemyMelee.AirKnockBack();
+                //anim.SetTrigger("Juggle");
+            }
+
+            isInIframe = true;
+            StartCoroutine(Invinciblity());
         }
     }
 
