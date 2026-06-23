@@ -807,6 +807,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 941098074}
     m_Modifications:
+    - target: {fileID: 968062186909847403, guid: 85d9c9abe338160409bb928353cba362, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4283122198143077251, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_Name
       value: EnemyTestMelee (1)
@@ -1380,6 +1384,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 941098074}
     m_Modifications:
+    - target: {fileID: 968062186909847403, guid: 85d9c9abe338160409bb928353cba362, type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1785366421043534746, guid: 85d9c9abe338160409bb928353cba362, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879394081307682379, guid: 85d9c9abe338160409bb928353cba362, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.242715
+      objectReference: {fileID: 0}
     - target: {fileID: 4283122198143077251, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_Name
       value: EnemyTestMelee
@@ -1388,13 +1404,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4415037775006892633, guid: 85d9c9abe338160409bb928353cba362, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.2427151
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502980114715112648, guid: 85d9c9abe338160409bb928353cba362, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8950462698058984997, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.05
       objectReference: {fileID: 0}
     - target: {fileID: 8950462698058984997, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.62
+      value: 1.006
       objectReference: {fileID: 0}
     - target: {fileID: 8950462698058984997, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2215,8 +2239,8 @@ Camera:
   m_GameObject: {fileID: 1697105086}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.3301887, g: 0.13538484, b: 0.076317206, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

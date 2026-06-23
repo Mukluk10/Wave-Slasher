@@ -14,6 +14,9 @@ public class EnemyMelee : MonoBehaviour
     private bool attacking;
     private bool isMoving;
 
+    public bool isOTG;
+    public bool isAirStunned;
+
     private NavMeshAgent agent;
 
     [SerializeField] private GameObject player;
@@ -22,9 +25,7 @@ public class EnemyMelee : MonoBehaviour
     [SerializeField] private float distance;
 
     [SerializeField] private int attackCount;
-
-    [SerializeField] private bool canBeJuggled;
-    [SerializeField] private bool canBeKnockedBack;
+    [SerializeField] private float knockBackTime;
 
     [SerializeField] private Animator anim;
     private void Awake()
@@ -43,7 +44,7 @@ public class EnemyMelee : MonoBehaviour
 
         distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
 
-        if(distance < readyDistance && !inReadyDistance)
+        if(distance < readyDistance && !inReadyDistance && !isOTG)
         {
             IsReadyDistance();
         }
@@ -75,6 +76,8 @@ public class EnemyMelee : MonoBehaviour
         {
             Vector3 relativePos = player.transform.position - transform.position;
             relativePos.y = 0f;
+            if (isOTG || isAirStunned)
+                return;
             Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
             transform.rotation = rotation;
         }
@@ -109,12 +112,12 @@ public class EnemyMelee : MonoBehaviour
     {
         agent.speed = moveSpeed;
         readyToAttack = true;
-        Debug.Log("Going to attack");
+        //Debug.Log("Going to attack");
     }
 
     private void Attack()
     {
-        Debug.Log("EnemyMeleeAttacked");
+        //Debug.Log("EnemyMeleeAttacked");
         //Random attack somehow
         Attack1();
     }
@@ -130,5 +133,25 @@ public class EnemyMelee : MonoBehaviour
     {
         anim.SetTrigger("Attack");
         recoveryTime = 1f;
+    }
+
+    public void AirKnockBack()
+    {
+
+    }
+
+    public void KnockDown()
+    {
+        isOTG = true;
+        recoveryTime = knockBackTime;
+        anim.SetTrigger("KnockDown");
+        StopAllCoroutines();
+        StartCoroutine(KnockDownState());
+    }
+
+    private IEnumerator KnockDownState()
+    {
+        yield return new WaitForSeconds(knockBackTime);
+        isOTG = false;
     }
 }

@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 Hitbox hitBox = other.GetComponent<Hitbox>();
                 health -= hitBox.damage;
-                Debug.Log("Took Damage: " + hitBox.damage);
+                //Debug.Log("Took Damage: " + hitBox.damage);
                 anim.SetTrigger("Damage");
                 attakScript.recoveryTime = 0.2f;
                 isInIframe = true;

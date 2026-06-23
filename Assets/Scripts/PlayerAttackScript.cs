@@ -22,6 +22,10 @@ public class PlayerAttackScript : MonoBehaviour
     private float maxMomentumSpeed;
     private Vector3 momentumDirection;
 
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private Transform currentTarget;
+    private Vector3 attackDir;
+
     public void OnAttack (InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -55,7 +59,24 @@ public class PlayerAttackScript : MonoBehaviour
 
     private void BasicAttack()
     {
-        if(attackCount == 0 && !isInRecovery)
+        FindClosestEnemy();
+
+        if (movementScript.moveDirection.sqrMagnitude > 0.5f)
+        {
+            transform.rotation = Quaternion.LookRotation(movementScript.moveDirection);
+        }
+        else
+        {
+            Debug.Log("AutoLockOn");
+            if (currentTarget != null)
+            {
+                attackDir = currentTarget.position - transform.position;
+                attackDir.y = 0f;
+                transform.rotation = Quaternion.LookRotation(attackDir);
+            }
+        }
+
+        if (attackCount == 0 && !isInRecovery)
         {
             anim.SetTrigger("Attack");
             canCombo = false;
@@ -94,12 +115,6 @@ public class PlayerAttackScript : MonoBehaviour
             recoveryTime = 0.5f;
             attackCancelTime = 0.5f;
         }
-
-
-        if (movementScript.moveDirection.sqrMagnitude > 0.001f)
-        {
-            transform.rotation = Quaternion.LookRotation(movementScript.moveDirection);
-        }
     }
 
     private void AirAttack()
@@ -128,6 +143,25 @@ public class PlayerAttackScript : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(movementScript.moveDirection);
         }
+    }
+
+    private void FindClosestEnemy()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, 2.5f, enemyLayer);
+
+        currentTarget = null;
+        float closestDistSqr = Mathf.Infinity;
+
+        foreach (Collider hit in hits)
+        {
+            float distSqr = (hit.transform.position - transform.position).sqrMagnitude;
+            if (distSqr < closestDistSqr)
+            {
+                closestDistSqr = distSqr;
+                currentTarget = hit.transform;
+            }
+        }
+        Debug.Log($"Hits found: {hits.Length}, target: {currentTarget}");
     }
 
     private void FixedUpdate()
@@ -172,7 +206,21 @@ public class PlayerAttackScript : MonoBehaviour
 
     private void ApplyMomentum()
     {
-        momentumDirection = movementScript.moveDirection.sqrMagnitude > 0.01f ? movementScript.moveDirection.normalized : transform.forward;
+        if (movementScript.moveDirection.sqrMagnitude > 0.5f)
+        {
+            momentumDirection = movementScript.moveDirection.normalized;
+        }
+        else if (currentTarget != null)
+        {
+            attackDir = currentTarget.position - transform.position;
+            attackDir.y = 0f;
+            momentumDirection = attackDir;
+        }
+        else
+        {
+            momentumDirection = transform.forward;
+        }
+
         StartCoroutine(AttackMomentum());
     }
 }

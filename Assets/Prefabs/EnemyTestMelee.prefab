@@ -173,13 +173,14 @@ MonoBehaviour:
   inReadyDistance: 0
   readyToAttack: 0
   recoveryTime: 0
+  isOTG: 0
+  isAirStunned: 0
   player: {fileID: 0}
   readyDistance: 3
   attackRange: 1.2
   distance: 0
   attackCount: 0
-  canBeJuggled: 0
-  canBeKnockedBack: 0
+  knockBackTime: 1.5
   anim: {fileID: 6608969569195368231}
 --- !u!114 &968062186909847403
 MonoBehaviour:
@@ -195,6 +196,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 15
   iFrameTime: 0
+  canBeJuggled: 0
+  canBeKnockedBack: 0
 --- !u!195 &272909970404096093
 NavMeshAgent:
   m_ObjectHideFlags: 0
