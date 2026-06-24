@@ -15,7 +15,10 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private bool canBeJuggled;
     [SerializeField] private bool canBeKnockedBack;
 
-    private bool isBlocking;
+    public bool isBlocking;
+    [SerializeField] private float blockChance;
+    [SerializeField] private float blockStunDuration;
+
 
     private void Awake()
     {
@@ -30,39 +33,69 @@ public class EnemyHealth : MonoBehaviour
             Die();
     }
 
+    private void FixedUpdate()
+    {
+        if (blockStunDuration > 0)
+        {
+            blockStunDuration -= 1 * Time.fixedDeltaTime;
+            isBlocking = true;
+        }
+        else
+        {
+            isBlocking = false;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("PlayerAttack") && !isInIframe)
         {
-
-            //Debug.Log("Enemy Got Hit");
             Hitbox hitBox = other.GetComponent<Hitbox>();
-            health -= hitBox.damage;
-            //Debug.Log("Took Damage: " + hitBox.damage);
-            if (hitBox.isKnockback)
+
+            float blockRoll = Random.Range(0, 100);
+            if ((blockRoll <= blockChance || isBlocking) && !enemyMelee.isInRecovery && !enemyMelee.isAirStunned && !enemyMelee.isOTG)
             {
-                enemyMelee.KnockDown();
+                //Block
+                anim.SetTrigger("Block");
+                blockStunDuration = 0.33f;
             }
-            if (!hitBox.isKnockback)
+            else
             {
-                if (enemyMelee.isOTG)
+                //Debug.Log("Enemy Got Hit");
+
+                health -= hitBox.damage;
+                //Debug.Log("Took Damage: " + hitBox.damage);
+                if (hitBox.isKnockback)
                 {
                     enemyMelee.KnockDown();
                 }
+                else if (hitBox.isJuggle)
+                {
+                    enemyMelee.AirKnockBack();
+                    anim.SetTrigger("Juggle");
+                }
                 else
                 {
-                    enemyMelee.recoveryTime = 0.5f;
-                    anim.SetTrigger("Damage");
+                    if (enemyMelee.isOTG)
+                    {
+                        enemyMelee.KnockDown();
+                    }
+                    else if (enemyMelee.isAirStunned)
+                    {
+                        enemyMelee.AirKnockBack();
+                        anim.SetTrigger("Juggle");
+                    }
+                    else
+                    {
+                        enemyMelee.recoveryTime = 0.5f;
+                        anim.SetTrigger("Damage");
+                    }
                 }
-            }
-            if (hitBox.isJuggle)
-            {
-                enemyMelee.AirKnockBack();
-                anim.SetTrigger("Juggle");
-            }
+                
 
-            isInIframe = true;
-            StartCoroutine(Invinciblity());
+                isInIframe = true;
+                StartCoroutine(Invinciblity());
+            }
         }
     }
 

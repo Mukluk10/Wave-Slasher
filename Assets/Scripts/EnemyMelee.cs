@@ -5,12 +5,12 @@ using UnityEngine.AI;
 public class EnemyMelee : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
-
+    private EnemyHealth healthScript;
 
     [SerializeField] private bool inReadyDistance;
     [SerializeField] private bool readyToAttack;
     public float recoveryTime;
-    private bool isInRecovery;
+    public bool isInRecovery;
     private bool attacking;
     private bool isMoving;
 
@@ -35,27 +35,31 @@ public class EnemyMelee : MonoBehaviour
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-    private bool isGrounded;
+    [SerializeField] private bool isGrounded;
     private Rigidbody rb;
+    private Coroutine knockBackCoroutine;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        healthScript = GetComponent<EnemyHealth>();
         player = GameObject.FindGameObjectWithTag("Player");
         agent.speed = moveSpeed;
     }
 
     private void FixedUpdate()
     {
-        if(player != null && !isInRecovery && !isOTG && !isAirStunned)
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundLayer);
+
+        if (player != null && !isInRecovery && !isOTG && !isAirStunned && !healthScript.isBlocking)
         {
             agent.SetDestination(player.transform.position);
         }
 
         distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
 
-        if(distance < readyDistance && !inReadyDistance && !isOTG)
+        if(distance < readyDistance && !inReadyDistance && !isOTG && !isAirStunned)
         {
             IsReadyDistance();
         }
@@ -65,12 +69,12 @@ public class EnemyMelee : MonoBehaviour
             LostReadyDistance();
         }
 
-        if(distance < attackRange && readyToAttack && !isInRecovery)
+        if(distance < attackRange && readyToAttack && !isInRecovery && !healthScript.isBlocking)
         {
             Attack();
         }
 
-        if(readyToAttack && distance > attackRange && !isInRecovery)
+        if(readyToAttack && distance > attackRange && !isInRecovery && !healthScript.isBlocking)
         {
             agent.speed = moveSpeed;
         }
@@ -83,12 +87,18 @@ public class EnemyMelee : MonoBehaviour
         else
         {
             isInRecovery = false;
+            //healthScript.isBlocking = false;
+        }
+
+        if (isGrounded && isAirStunned)
+        {
+            KnockDown();
         }
     }
 
     private void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.3f, groundLayer);
+        
 
         if (inReadyDistance && !attacking)
         {
@@ -100,11 +110,6 @@ public class EnemyMelee : MonoBehaviour
             transform.rotation = rotation;
         }
 
-        if(isGrounded && isAirStunned)
-        {
-            KnockDown();
-        }
-
         if (agent.speed > 0.01f)
             isMoving = true;
         else
@@ -114,18 +119,21 @@ public class EnemyMelee : MonoBehaviour
     }
     private void IsReadyDistance()
     {
-        readyDistance += 1f;
-        inReadyDistance = true;
-        agent.speed = 0;
-        StartCoroutine(AttackTimeDivergence());
-        //When to attack
+        if (!inReadyDistance)
+        {
+            readyDistance += 1f;
+            inReadyDistance = true;
+            agent.speed = 0;
+            StartCoroutine(AttackTimeDivergence());
+            //When to attack
+        }
     }
 
     private void LostReadyDistance()
     {
         readyDistance -= 1f;
         agent.speed = moveSpeed;
-        StopAllCoroutines();
+        StopCoroutine(AttackTimeDivergence());
         readyToAttack = false;
         inReadyDistance = false;
         //move towards player
@@ -181,29 +189,28 @@ public class EnemyMelee : MonoBehaviour
 
     public void AirKnockBack()
     {
+        rb.isKinematic = false;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+
         if (isGrounded)
         {
+            isAirStunned = true;
             isOTG = false;
             agent.enabled = false;
-            rb.isKinematic = false;
-            rb.interpolation = RigidbodyInterpolation.Interpolate;
-            rb.AddForce(transform.up * 5f, ForceMode.Impulse);
-            isAirStunned = true;
             recoveryTime = 99999;
             StopAllCoroutines();
         }
-        else
-        {
-            rb.AddForce(transform.up * 5f, ForceMode.Impulse);
-        }
+            rb.AddForce(transform.up * 100f, ForceMode.Impulse);
     }
 
     public void KnockDown()
     {
+        isAirStunned = false;
         agent.enabled = true;
         rb.isKinematic = true;
+        //inReadyDistance = false;
+        //readyToAttack = false;
         rb.interpolation = RigidbodyInterpolation.None;
-        isAirStunned = false;
         isOTG = true;
         recoveryTime = knockBackTime;
         anim.SetTrigger("KnockDown");
