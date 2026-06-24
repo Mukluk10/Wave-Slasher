@@ -27,6 +27,10 @@ public class EnemyMelee : MonoBehaviour
     [SerializeField] private int attackCount;
     [SerializeField] private float knockBackTime;
 
+    [SerializeField] private float attack1Recovery;
+    [SerializeField] private float attack2Recovery;
+    [SerializeField] private float attack3Recovery;
+
     [SerializeField] private Animator anim;
 
     [SerializeField] private Transform groundCheck;
@@ -66,6 +70,11 @@ public class EnemyMelee : MonoBehaviour
             Attack();
         }
 
+        if(readyToAttack && distance > attackRange && !isInRecovery)
+        {
+            agent.speed = moveSpeed;
+        }
+
         if (recoveryTime > 0)
         {
             recoveryTime -= 1 * Time.fixedDeltaTime;
@@ -79,7 +88,7 @@ public class EnemyMelee : MonoBehaviour
 
     private void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, 0.2f, groundLayer);
+        isGrounded = Physics.CheckSphere(groundCheck.position, 0.3f, groundLayer);
 
         if (inReadyDistance && !attacking)
         {
@@ -130,8 +139,37 @@ public class EnemyMelee : MonoBehaviour
 
     private void Attack()
     {
+        agent.speed = 0;
         //Random attack somehow
-        Attack1();
+        int randomAttack;
+        randomAttack = Random.Range(1, attackCount +1);
+
+        if(randomAttack == 1)
+            Attack1();
+
+        if (randomAttack == 2)
+            Attack2();
+
+        if (randomAttack == 3)
+            Attack3();
+    }
+
+    private void Attack1()
+    {
+        anim.SetTrigger("Attack1");
+        recoveryTime = attack1Recovery;
+    }
+
+    private void Attack2()
+    {
+        anim.SetTrigger("Attack2");
+        recoveryTime = attack2Recovery;
+    }
+
+    private void Attack3()
+    {
+        anim.SetTrigger("Attack3");
+        recoveryTime = attack3Recovery;
     }
 
     private IEnumerator AttackTimeDivergence()
@@ -141,12 +179,6 @@ public class EnemyMelee : MonoBehaviour
         GoingToAttack();
     }
 
-    private void Attack1()
-    {
-        anim.SetTrigger("Attack");
-        recoveryTime = 1f;
-    }
-
     public void AirKnockBack()
     {
         if (isGrounded)
@@ -154,6 +186,7 @@ public class EnemyMelee : MonoBehaviour
             isOTG = false;
             agent.enabled = false;
             rb.isKinematic = false;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
             rb.AddForce(transform.up * 5f, ForceMode.Impulse);
             isAirStunned = true;
             recoveryTime = 99999;
@@ -169,6 +202,7 @@ public class EnemyMelee : MonoBehaviour
     {
         agent.enabled = true;
         rb.isKinematic = true;
+        rb.interpolation = RigidbodyInterpolation.None;
         isAirStunned = false;
         isOTG = true;
         recoveryTime = knockBackTime;

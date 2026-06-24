@@ -15,6 +15,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private bool canBeJuggled;
     [SerializeField] private bool canBeKnockedBack;
 
+    private bool isBlocking;
+
     private void Awake()
     {
         maxHealth = health;
@@ -32,6 +34,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if (other.CompareTag("PlayerAttack") && !isInIframe)
         {
+
             //Debug.Log("Enemy Got Hit");
             Hitbox hitBox = other.GetComponent<Hitbox>();
             health -= hitBox.damage;
@@ -55,7 +58,7 @@ public class EnemyHealth : MonoBehaviour
             if (hitBox.isJuggle)
             {
                 enemyMelee.AirKnockBack();
-                //anim.SetTrigger("Juggle");
+                anim.SetTrigger("Juggle");
             }
 
             isInIframe = true;

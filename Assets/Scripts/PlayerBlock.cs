@@ -61,6 +61,14 @@ public class PlayerBlock : MonoBehaviour
         StartCoroutine(BlockRecovery());
     }
 
+    public void GuardBreak()
+    {
+        anim.SetTrigger("BlockBreak");
+        isBlocking = false;
+        attackScript.recoveryTime = 0.8f;
+        StartCoroutine(BlockRecovery());
+    }
+
     private IEnumerator BlockRecovery()
     {
         yield return new WaitForSeconds(0.2f);

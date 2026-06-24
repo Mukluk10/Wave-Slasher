@@ -27,9 +27,10 @@ public class PlayerHealth : MonoBehaviour
     {
         if (other.CompareTag("EnemyAttack") && !isInIframe)
         {
+            Hitbox hitBox = other.GetComponent<Hitbox>();
+
             if (!blockScript.isBlocking)
             {
-                Hitbox hitBox = other.GetComponent<Hitbox>();
                 health -= hitBox.damage;
                 //Debug.Log("Took Damage: " + hitBox.damage);
                 anim.SetTrigger("Damage");
@@ -39,7 +40,21 @@ public class PlayerHealth : MonoBehaviour
             }
             else
             {
-                //Blocked attack;
+                if (hitBox.isGuardBreak)
+                {
+                    blockScript.GuardBreak();
+                }
+                else
+                {
+                    anim.SetTrigger("BlockStun");
+                    attakScript.recoveryTime = 0.2f;
+
+                    attakScript.FindClosestEnemy();
+
+                    Vector3 attackDir = attakScript.currentTarget.position - transform.position;
+                    attackDir.y = 0f;
+                    transform.rotation = Quaternion.LookRotation(attackDir);
+                }
             }
         }
     }

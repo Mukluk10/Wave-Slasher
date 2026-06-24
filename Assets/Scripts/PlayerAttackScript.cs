@@ -23,7 +23,7 @@ public class PlayerAttackScript : MonoBehaviour
     private Vector3 momentumDirection;
 
     [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private Transform currentTarget;
+    public Transform currentTarget;
     private Vector3 attackDir;
 
     public void OnAttack (InputAction.CallbackContext ctx)
@@ -178,6 +178,15 @@ public class PlayerAttackScript : MonoBehaviour
             }
         }
 
+        if (attackCount == 0 && canCombo)
+        {
+            anim.SetTrigger("Special");
+            canCombo = false;
+            ApplyMomentum();
+            recoveryTime = 1.4f;
+            attackCancelTime = 1.4f;
+        }
+
         if (attackCount == 1 && canCombo)
         {
             anim.SetTrigger("Special");
@@ -193,7 +202,7 @@ public class PlayerAttackScript : MonoBehaviour
 
     }
 
-    private void FindClosestEnemy()
+    public void FindClosestEnemy()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, 2.5f, enemyLayer);
 
@@ -252,7 +261,7 @@ public class PlayerAttackScript : MonoBehaviour
         momentumSpeed = maxMomentumSpeed;
     }
 
-    private void ApplyMomentum()
+    public void ApplyMomentum()
     {
         if (movementScript.moveDirection.sqrMagnitude > 0.5f)
         {

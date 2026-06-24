@@ -6,4 +6,5 @@ public class Hitbox : MonoBehaviour
     public Vector3 knockback;
     public bool isKnockback;
     public bool isJuggle;
+    public bool isGuardBreak;
 }
