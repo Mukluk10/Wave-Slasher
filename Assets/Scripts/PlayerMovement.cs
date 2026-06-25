@@ -145,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void EnemyStep()
     {
-        Debug.Log("EnemyStep");
+        anim.SetTrigger("Jump");
         verticalVelocity = Mathf.Sqrt(enemyStepHeight * -2f * gravity);
     }
 

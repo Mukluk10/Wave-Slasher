@@ -49,13 +49,11 @@ public class PlayerBlock : MonoBehaviour
 
     private void Block()
     {
-        Debug.Log("blocking");
         isBlocking = true;
     }
 
     public void StopBlocking()
     {
-        Debug.Log("stop blocking");
         isInBlockRecovery = true;
         isBlocking = false;
         StartCoroutine(BlockRecovery());

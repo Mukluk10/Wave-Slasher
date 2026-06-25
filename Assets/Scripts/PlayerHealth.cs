@@ -32,7 +32,6 @@ public class PlayerHealth : MonoBehaviour
             if (!blockScript.isBlocking)
             {
                 health -= hitBox.damage;
-                //Debug.Log("Took Damage: " + hitBox.damage);
                 anim.SetTrigger("Damage");
                 attakScript.recoveryTime = 0.2f;
                 isInIframe = true;

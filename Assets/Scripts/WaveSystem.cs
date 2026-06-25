@@ -1,11 +1,12 @@
 using System.Collections;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class WaveSystem : MonoBehaviour
 {
+    public static WaveSystem Instance { get; private set; }
+
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private GameObject[] enemiesToSpawm;
+    [SerializeField] private GameObject[] enemiesToSpawn;
 
     [SerializeField] private int enemyCount;
     public int enemiesKilled;
@@ -20,9 +21,10 @@ public class WaveSystem : MonoBehaviour
     private bool waveIsStarted;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
+    private void Awake()
     {
         StartCoroutine(WaveDowntime());
+        Instance = this; 
     }
 
     private void FixedUpdate()
@@ -45,6 +47,7 @@ public class WaveSystem : MonoBehaviour
 
     private void WaveStart()
     {
+        Debug.Log("Wave " + waveCount + " started!");
         waveCount++;
         enemyCount += 3;
         enemiesKilled = 0;
@@ -62,7 +65,10 @@ public class WaveSystem : MonoBehaviour
     {
         spawningEnemy = true;
         yield return new WaitForSeconds(timeBetweenEnemies);
-        Debug.Log("EnemySpawned");
+
+        Transform spawnPos = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Instantiate (enemiesToSpawn[0], spawnPos.position, Quaternion.identity);
+
         spawnedEnemies++;
         spawningEnemy = false;
         waveIsStarted = true;

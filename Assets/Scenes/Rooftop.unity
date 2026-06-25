@@ -1073,7 +1073,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 968062186909847403, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: health
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4283122198143077251, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_Name
@@ -1606,7 +1606,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 968062186909847403, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: health
-      value: 10000
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 968062186909847403, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: blockChance
@@ -1630,7 +1630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4283122198143077251, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4415037775006892633, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2216,7 +2216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1643122979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2234,10 +2234,9 @@ MonoBehaviour:
   - {fileID: 1045530631}
   - {fileID: 908942664}
   - {fileID: 897497636}
-  enemiesToSpawm:
+  enemiesToSpawn:
   - {fileID: 4283122198143077251, guid: 85d9c9abe338160409bb928353cba362, type: 3}
   enemyCount: 1
-  enemiesKilled: 0
   spawnedEnemies: 0
   waveCount: 0
   timeBetweenWaves: 5

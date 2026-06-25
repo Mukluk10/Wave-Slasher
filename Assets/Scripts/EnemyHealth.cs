@@ -1,13 +1,18 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int health;
     private int maxHealth;
+    private bool isDead;
+
+    CapsuleCollider col;
     private Animator anim;
 
     private EnemyMelee enemyMelee;
+    private NavMeshAgent agent;
 
     [SerializeField] private float iFrameTime;
     private bool isInIframe;
@@ -25,11 +30,13 @@ public class EnemyHealth : MonoBehaviour
         maxHealth = health;
         enemyMelee = GetComponent<EnemyMelee>();
         anim = GetComponent<Animator>();
+        col = GetComponent<CapsuleCollider>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
     {
-        if (health <= 0)
+        if (health <= 0 && !isDead)
             Die();
     }
 
@@ -73,10 +80,7 @@ public class EnemyHealth : MonoBehaviour
             }
             else
             {
-                //Debug.Log("Enemy Got Hit");
-
                 health -= hitBox.damage;
-                //Debug.Log("Took Damage: " + hitBox.damage);
                 if (hitBox.isKnockback)
                 {
                     enemyMelee.KnockDown();
@@ -118,6 +122,13 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        isDead = true;
+        anim.SetTrigger("Death");
+        this.enabled = false;
+        enemyMelee.enabled = false;
+        col.enabled = false;
+        agent.enabled = false;
+        WaveSystem.Instance.enemiesKilled++;
+        Destroy(gameObject, 60f);
     }
 }

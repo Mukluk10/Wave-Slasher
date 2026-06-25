@@ -81,7 +81,6 @@ public class PlayerAttackScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("AutoLockOn");
             if (currentTarget != null)
             {
                 attackDir = currentTarget.position - transform.position;
@@ -165,7 +164,6 @@ public class PlayerAttackScript : MonoBehaviour
         }
         else
         {
-            Debug.Log("AutoLockOn");
             if (currentTarget != null)
             {
                 attackDir = currentTarget.position - transform.position;
@@ -220,7 +218,6 @@ public class PlayerAttackScript : MonoBehaviour
                 currentTarget = hit.transform;
             }
         }
-        Debug.Log($"Hits found: {hits.Length}, target: {currentTarget}");
     }
 
     private void FixedUpdate()

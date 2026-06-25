@@ -87,7 +87,6 @@ public class EnemyMelee : MonoBehaviour
         else
         {
             isInRecovery = false;
-            //healthScript.isBlocking = false;
         }
 
         if (isGrounded && isAirStunned)
@@ -148,7 +147,6 @@ public class EnemyMelee : MonoBehaviour
     private void Attack()
     {
         agent.speed = 0;
-        //Random attack somehow
         int randomAttack;
         randomAttack = Random.Range(1, attackCount +1);
 
@@ -208,8 +206,6 @@ public class EnemyMelee : MonoBehaviour
         isAirStunned = false;
         agent.enabled = true;
         rb.isKinematic = true;
-        //inReadyDistance = false;
-        //readyToAttack = false;
         rb.interpolation = RigidbodyInterpolation.None;
         isOTG = true;
         recoveryTime = knockBackTime;
