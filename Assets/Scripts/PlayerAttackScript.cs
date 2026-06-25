@@ -195,6 +195,15 @@ public class PlayerAttackScript : MonoBehaviour
             recoveryTime = 0.4f;
             attackCancelTime = 0.4f;
         }
+
+        if (attackCount == 2 && canCombo)
+        {
+            anim.SetTrigger("Special");
+            canCombo = false;
+            ApplyMomentum();
+            recoveryTime = 0.6f;
+            attackCancelTime = 0.6f;
+        }
     }
 
     private void AirSpecial()

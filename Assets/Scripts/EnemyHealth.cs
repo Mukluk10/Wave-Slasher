@@ -55,9 +55,21 @@ public class EnemyHealth : MonoBehaviour
             float blockRoll = Random.Range(0, 100);
             if ((blockRoll <= blockChance || isBlocking) && !enemyMelee.isInRecovery && !enemyMelee.isAirStunned && !enemyMelee.isOTG)
             {
-                //Block
-                anim.SetTrigger("Block");
-                blockStunDuration = 0.33f;
+                if (hitBox.isGuardBreak)
+                {
+                    blockStunDuration = 0;
+                    anim.SetTrigger("BlockBreak");
+                    anim.ResetTrigger("Attack1");
+                    anim.ResetTrigger("Attack2");
+                    anim.ResetTrigger("Attack3");
+                    enemyMelee.recoveryTime = 1f;
+                }
+                else
+                {
+                    //Block
+                    anim.SetTrigger("Block");
+                    blockStunDuration = 1f;
+                }
             }
             else
             {
@@ -91,7 +103,6 @@ public class EnemyHealth : MonoBehaviour
                         anim.SetTrigger("Damage");
                     }
                 }
-                
 
                 isInIframe = true;
                 StartCoroutine(Invinciblity());

@@ -206,6 +206,7 @@ MonoBehaviour:
   inReadyDistance: 0
   readyToAttack: 0
   recoveryTime: 0
+  isInRecovery: 0
   isOTG: 0
   isAirStunned: 0
   player: {fileID: 0}
@@ -222,6 +223,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  isGrounded: 0
 --- !u!114 &968062186909847403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +240,9 @@ MonoBehaviour:
   iFrameTime: 0
   canBeJuggled: 1
   canBeKnockedBack: 1
+  isBlocking: 0
   blockChance: 25
+  blockStunDuration: 0
 --- !u!195 &272909970404096093
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -879,7 +883,7 @@ PrefabInstance:
     - target: {fileID: -4157524182732408741, guid: f5294fbc93180994896c2ca9ba771381, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: d7e56b48ba666194d923b1ccd396de8c, type: 2}
+      objectReference: {fileID: 2100000, guid: 8008f15a9cd2192489e87a6d2aa32b09, type: 2}
     - target: {fileID: -3821578454160332865, guid: f5294fbc93180994896c2ca9ba771381, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
