@@ -95,7 +95,6 @@ public class PlayerAttackScript : MonoBehaviour
             anim.SetTrigger("Attack");
             canCombo = false;
             attackCount++;
-            ApplyMomentum();
             recoveryTime = 0.3f;
             attackCancelTime = 0.15f;
         }
@@ -105,7 +104,6 @@ public class PlayerAttackScript : MonoBehaviour
             anim.SetTrigger("Attack");
             canCombo = false;
             attackCount++;
-            ApplyMomentum();
             recoveryTime = 0.3f;
             attackCancelTime = 0.15f;
         }
@@ -115,7 +113,6 @@ public class PlayerAttackScript : MonoBehaviour
             anim.SetTrigger("Attack");
             canCombo = false;
             attackCount++;
-            ApplyMomentum();
             recoveryTime = 0.3f;
             attackCancelTime = 0.15f;
         }
@@ -125,7 +122,6 @@ public class PlayerAttackScript : MonoBehaviour
             anim.SetTrigger("Attack");
             canCombo = false;
             attackCount++;
-            ApplyMomentum();
             recoveryTime = 0.5f;
             attackCancelTime = 0.5f;
         }
@@ -182,7 +178,6 @@ public class PlayerAttackScript : MonoBehaviour
         {
             anim.SetTrigger("Special");
             canCombo = false;
-            ApplyMomentum();
             recoveryTime = 1.4f;
             attackCancelTime = 1.4f;
         }
@@ -191,7 +186,6 @@ public class PlayerAttackScript : MonoBehaviour
         {
             anim.SetTrigger("Special");
             canCombo = false;
-            ApplyMomentum();
             recoveryTime = 0.4f;
             attackCancelTime = 0.4f;
         }
@@ -200,7 +194,6 @@ public class PlayerAttackScript : MonoBehaviour
         {
             anim.SetTrigger("Special");
             canCombo = false;
-            ApplyMomentum();
             recoveryTime = 0.6f;
             attackCancelTime = 0.6f;
         }
