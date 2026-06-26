@@ -14,6 +14,9 @@ public class PlayerHealth : MonoBehaviour
     private float iFrameTime = 0.1f;
     private bool isInIframe;
 
+    [SerializeField] private GameObject bloodBig;
+    [SerializeField] private GameObject bloodSmall;
+
     private void Awake()
     {
         maxHealth = health;
@@ -32,6 +35,7 @@ public class PlayerHealth : MonoBehaviour
             if (!blockScript.isBlocking)
             {
                 health -= hitBox.damage;
+                Instantiate(bloodSmall, transform.position, Quaternion.identity);
                 anim.SetTrigger("Damage");
                 attakScript.recoveryTime = 0.2f;
                 isInIframe = true;

@@ -24,6 +24,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private float blockChance;
     [SerializeField] private float blockStunDuration;
 
+    [SerializeField] private GameObject bloodBig;
+    [SerializeField] private GameObject bloodSmall;
 
     private void Awake()
     {
@@ -81,6 +83,7 @@ public class EnemyHealth : MonoBehaviour
             else
             {
                 health -= hitBox.damage;
+                Instantiate(bloodSmall, transform.position, Quaternion.identity);
                 if (hitBox.isKnockback)
                 {
                     enemyMelee.KnockDown();
@@ -129,6 +132,7 @@ public class EnemyHealth : MonoBehaviour
         col.enabled = false;
         agent.enabled = false;
         WaveSystem.Instance.enemiesKilled++;
+        Instantiate(bloodBig, transform.position, Quaternion.identity);
         Destroy(gameObject, 60f);
     }
 }
