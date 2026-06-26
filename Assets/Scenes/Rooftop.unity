@@ -1630,7 +1630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4283122198143077251, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4415037775006892633, guid: 85d9c9abe338160409bb928353cba362, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2216,7 +2216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1643122979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2237,6 +2237,7 @@ MonoBehaviour:
   enemiesToSpawn:
   - {fileID: 4283122198143077251, guid: 85d9c9abe338160409bb928353cba362, type: 3}
   enemyCount: 1
+  enemiesKilled: 0
   spawnedEnemies: 0
   waveCount: 0
   timeBetweenWaves: 5
@@ -3155,7 +3156,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1.526557e-17
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8906736095016221491, guid: 7dc06906460f43b45b736241cbf9d362, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
