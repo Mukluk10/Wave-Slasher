@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 211597875272031342}
   - component: {fileID: 1001742055679792431}
   - component: {fileID: 7364660506695615858}
-  - component: {fileID: 1773969059886883790}
+  - component: {fileID: 4897694608551575681}
   m_Layer: 0
   m_Name: BasicAttack2
   m_TagString: PlayerAttack
@@ -568,33 +568,20 @@ MonoBehaviour:
   isKnockback: 0
   isJuggle: 0
   isGuardBreak: 0
---- !u!54 &1773969059886883790
-Rigidbody:
+--- !u!114 &4897694608551575681
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2510834495812127186}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8925f82d4e1b4f04aad4760c25b966d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snd: {fileID: 1113698679711303867}
+  sndClip: {fileID: 8300000, guid: 303d44c8d6ec943a38df8ec10b19d9c7, type: 3}
 --- !u!1 &2572778463377165878
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,9 +843,9 @@ AudioSource:
   m_GameObject: {fileID: 3497529310988556035}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -7006214716320124214, guid: b320ced732e987647afb2e8cc6189766, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -957,7 +944,7 @@ GameObject:
   - component: {fileID: 3714669734495552324}
   - component: {fileID: 1229283339072772095}
   - component: {fileID: 5452024175257017227}
-  - component: {fileID: 8354223174717562250}
+  - component: {fileID: 3907905198237675582}
   m_Layer: 0
   m_Name: BasicAttack3
   m_TagString: PlayerAttack
@@ -1071,33 +1058,20 @@ MonoBehaviour:
   isKnockback: 0
   isJuggle: 0
   isGuardBreak: 0
---- !u!54 &8354223174717562250
-Rigidbody:
+--- !u!114 &3907905198237675582
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3580304194882292130}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8925f82d4e1b4f04aad4760c25b966d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snd: {fileID: 1113698679711303867}
+  sndClip: {fileID: 8300000, guid: 303d44c8d6ec943a38df8ec10b19d9c7, type: 3}
 --- !u!1 &3687617581068525987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,7 +1085,7 @@ GameObject:
   - component: {fileID: 464018908610200834}
   - component: {fileID: 5095654323110416790}
   - component: {fileID: 7019183417369248154}
-  - component: {fileID: 1490182158601762959}
+  - component: {fileID: 3215354180923260896}
   m_Layer: 0
   m_Name: BasicAttack4
   m_TagString: PlayerAttack
@@ -1225,33 +1199,20 @@ MonoBehaviour:
   isKnockback: 1
   isJuggle: 0
   isGuardBreak: 0
---- !u!54 &1490182158601762959
-Rigidbody:
+--- !u!114 &3215354180923260896
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3687617581068525987}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8925f82d4e1b4f04aad4760c25b966d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snd: {fileID: 1113698679711303867}
+  sndClip: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
 --- !u!1 &3875672369947366630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,7 +1452,7 @@ GameObject:
   - component: {fileID: 7574231779107036075}
   - component: {fileID: 7228821265588648523}
   - component: {fileID: 8714086751581516531}
-  - component: {fileID: 3974908862404576804}
+  - component: {fileID: 1093567648227775622}
   m_Layer: 0
   m_Name: BasicAttack1
   m_TagString: PlayerAttack
@@ -1605,33 +1566,20 @@ MonoBehaviour:
   isKnockback: 0
   isJuggle: 0
   isGuardBreak: 0
---- !u!54 &3974908862404576804
-Rigidbody:
+--- !u!114 &1093567648227775622
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4833714346969181541}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8925f82d4e1b4f04aad4760c25b966d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snd: {fileID: 1113698679711303867}
+  sndClip: {fileID: 8300000, guid: 303d44c8d6ec943a38df8ec10b19d9c7, type: 3}
 --- !u!1 &5034626320967604680
 GameObject:
   m_ObjectHideFlags: 0
@@ -1709,7 +1657,7 @@ GameObject:
   - component: {fileID: 1456195405309648881}
   - component: {fileID: 215715314201392508}
   - component: {fileID: 5480639358630677522}
-  - component: {fileID: 8198234659841630125}
+  - component: {fileID: 8323026886711193336}
   m_Layer: 0
   m_Name: AirAttack2
   m_TagString: PlayerAttack
@@ -1823,33 +1771,20 @@ MonoBehaviour:
   isKnockback: 0
   isJuggle: 0
   isGuardBreak: 0
---- !u!54 &8198234659841630125
-Rigidbody:
+--- !u!114 &8323026886711193336
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5289287562765125227}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8925f82d4e1b4f04aad4760c25b966d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snd: {fileID: 1113698679711303867}
+  sndClip: {fileID: 8300000, guid: 303d44c8d6ec943a38df8ec10b19d9c7, type: 3}
 --- !u!1 &5658062765460512814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1863,7 +1798,7 @@ GameObject:
   - component: {fileID: 1784532889213754892}
   - component: {fileID: 8849396530982615002}
   - component: {fileID: 5113558724821402237}
-  - component: {fileID: 4837200330070649739}
+  - component: {fileID: 360153616894122408}
   m_Layer: 0
   m_Name: Special2
   m_TagString: PlayerAttack
@@ -1977,33 +1912,20 @@ MonoBehaviour:
   isKnockback: 0
   isJuggle: 0
   isGuardBreak: 0
---- !u!54 &4837200330070649739
-Rigidbody:
+--- !u!114 &360153616894122408
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5658062765460512814}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8925f82d4e1b4f04aad4760c25b966d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snd: {fileID: 1113698679711303867}
+  sndClip: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
 --- !u!1 &5738408945181186404
 GameObject:
   m_ObjectHideFlags: 0
@@ -2354,7 +2276,7 @@ GameObject:
   - component: {fileID: 510157054619519776}
   - component: {fileID: 3305450278990864963}
   - component: {fileID: 2436050164561875237}
-  - component: {fileID: 2214129338983491081}
+  - component: {fileID: 3517524241441489561}
   m_Layer: 0
   m_Name: Special3
   m_TagString: PlayerAttack
@@ -2468,33 +2390,20 @@ MonoBehaviour:
   isKnockback: 0
   isJuggle: 0
   isGuardBreak: 1
---- !u!54 &2214129338983491081
-Rigidbody:
+--- !u!114 &3517524241441489561
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6508638078100421889}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8925f82d4e1b4f04aad4760c25b966d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snd: {fileID: 1113698679711303867}
+  sndClip: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
 --- !u!1 &6674815451596162629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2603,7 +2512,7 @@ GameObject:
   - component: {fileID: 7681171624338337068}
   - component: {fileID: 7268813564998213586}
   - component: {fileID: 5944460240171738681}
-  - component: {fileID: 54362800731935144}
+  - component: {fileID: 6302180110972708144}
   m_Layer: 0
   m_Name: Special1
   m_TagString: PlayerAttack
@@ -2717,33 +2626,20 @@ MonoBehaviour:
   isKnockback: 1
   isJuggle: 0
   isGuardBreak: 1
---- !u!54 &54362800731935144
-Rigidbody:
+--- !u!114 &6302180110972708144
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7448089170960652831}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8925f82d4e1b4f04aad4760c25b966d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snd: {fileID: 1113698679711303867}
+  sndClip: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
 --- !u!1 &7681238425860252010
 GameObject:
   m_ObjectHideFlags: 0
@@ -3154,7 +3050,7 @@ MonoBehaviour:
   health: 100
   bloodBig: {fileID: 1625278768672425542, guid: d6779e39d20176d4493dd461fe46bc88, type: 3}
   bloodSmall: {fileID: 5903091112707813735, guid: b1e407c145537b54fb5711e8791d5810, type: 3}
-  sparkSmall: {fileID: 906222500829015853, guid: 031643e98f7ed2a43b241eb01121291e, type: 3}
+  sparkSmall: {fileID: 906222500829015853, guid: 4fde257400ceca447869e76a5568aa97, type: 3}
   swordPos: {fileID: 8835992572531769339}
 --- !u!114 &3239522019239188735
 MonoBehaviour:
@@ -3169,7 +3065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBlocking: 0
-  sparkBig: {fileID: 906222500829015853, guid: 031643e98f7ed2a43b241eb01121291e, type: 3}
+  sparkBig: {fileID: 906222500829015853, guid: 3460f8bc9948a9c40bd316f4f26608eb, type: 3}
   swordPos: {fileID: 8835992572531769339}
 --- !u!143 &9220780024772743028
 CharacterController:
@@ -3271,7 +3167,7 @@ GameObject:
   - component: {fileID: 97965122541430370}
   - component: {fileID: 8793995953270669607}
   - component: {fileID: 8575085837042203926}
-  - component: {fileID: 9017073542218977510}
+  - component: {fileID: 1700181567954731476}
   m_Layer: 0
   m_Name: AirAttack1
   m_TagString: PlayerAttack
@@ -3385,30 +3281,17 @@ MonoBehaviour:
   isKnockback: 0
   isJuggle: 0
   isGuardBreak: 0
---- !u!54 &9017073542218977510
-Rigidbody:
+--- !u!114 &1700181567954731476
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8974375450199382975}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8925f82d4e1b4f04aad4760c25b966d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snd: {fileID: 1113698679711303867}
+  sndClip: {fileID: 8300000, guid: 303d44c8d6ec943a38df8ec10b19d9c7, type: 3}

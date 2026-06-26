@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
     private int maxHealth;
     private bool isDead;
 
-    CapsuleCollider col;
+    private CapsuleCollider col;
     private Animator anim;
 
     private EnemyMelee enemyMelee;
@@ -29,7 +29,9 @@ public class EnemyHealth : MonoBehaviour
 
     [SerializeField] private GameObject sparkBig;
     [SerializeField] private GameObject sparkSmall;
+    [SerializeField] private GameObject splat;
     [SerializeField] private Transform swordPos;
+    [SerializeField] private Transform groundCheck;
 
     private void Awake()
     {
@@ -129,6 +131,12 @@ public class EnemyHealth : MonoBehaviour
         isInIframe = false;
     }
 
+    private IEnumerator DeathFallTime()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Instantiate(splat, groundCheck.position, splat.transform.rotation);
+    }
+
     private void Die()
     {
         isDead = true;
@@ -139,6 +147,7 @@ public class EnemyHealth : MonoBehaviour
         agent.enabled = false;
         WaveSystem.Instance.enemiesKilled++;
         Instantiate(bloodBig, transform.position, Quaternion.identity);
+        StartCoroutine(DeathFallTime());
         Destroy(gameObject, 60f);
     }
 }

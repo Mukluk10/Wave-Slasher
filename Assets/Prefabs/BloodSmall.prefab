@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6665965746051984313}
   - component: {fileID: 6348064466524563931}
   - component: {fileID: 8939967896325606711}
+  - component: {fileID: 5132320243244950415}
+  - component: {fileID: 4149940335373518829}
   m_Layer: 0
   m_Name: BloodSmall
   m_TagString: Untagged
@@ -4905,4 +4907,120 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab15396cb88de349b8dfc1bccc35e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDestroy: 6
+  timeToDestroy: 3
+--- !u!114 &5132320243244950415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5903091112707813735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be485d533954754bb87c47519978059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snd: {fileID: 4149940335373518829}
+  sndClips:
+  - {fileID: 8300000, guid: 660a935b881b3a249bf40366c1cebe71, type: 3}
+  - {fileID: 8300000, guid: 03601f4aa21995c479ed41bb684a7b8e, type: 3}
+  - {fileID: 8300000, guid: 2f7ba3f20765eef4e906497b9d6fe90c, type: 3}
+  - {fileID: 8300000, guid: b5f466d142f4c564e8a85825d759c3f8, type: 3}
+  - {fileID: 8300000, guid: 914f8e0a55d5dd0468019faacaf18639, type: 3}
+--- !u!82 &4149940335373518829
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5903091112707813735}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -7006214716320124214, guid: b320ced732e987647afb2e8cc6189766, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.75
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

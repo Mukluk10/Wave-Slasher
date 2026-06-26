@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 183952600476178092}
   - component: {fileID: 3828724334167021833}
   - component: {fileID: 1352956990564576707}
+  - component: {fileID: 8965032500719624173}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -90,6 +91,103 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!82 &8965032500719624173
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704346353183230998}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -7006214716320124214, guid: b320ced732e987647afb2e8cc6189766, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2518220714354587267
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,6 +355,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   isGrounded: 0
+  splatEffect: {fileID: 1336978905138984950, guid: 7d32586f12cbb8c4c9eea420fb7ffcd7, type: 3}
 --- !u!114 &968062186909847403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,9 +377,11 @@ MonoBehaviour:
   blockStunDuration: 0
   bloodBig: {fileID: 1625278768672425542, guid: d6779e39d20176d4493dd461fe46bc88, type: 3}
   bloodSmall: {fileID: 5903091112707813735, guid: b1e407c145537b54fb5711e8791d5810, type: 3}
-  sparkBig: {fileID: 906222500829015853, guid: 031643e98f7ed2a43b241eb01121291e, type: 3}
+  sparkBig: {fileID: 906222500829015853, guid: 3fb88763bdf7b574f907009eef270640, type: 3}
   sparkSmall: {fileID: 906222500829015853, guid: 031643e98f7ed2a43b241eb01121291e, type: 3}
+  splat: {fileID: 1336978905138984950, guid: 7d32586f12cbb8c4c9eea420fb7ffcd7, type: 3}
   swordPos: {fileID: 3486794157232416355}
+  groundCheck: {fileID: 3686559862294542445}
 --- !u!195 &272909970404096093
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -654,6 +755,7 @@ GameObject:
   - component: {fileID: 8292653648455985879}
   - component: {fileID: 6647426622896151341}
   - component: {fileID: 1772868738745039151}
+  - component: {fileID: 1164784613204696584}
   m_Layer: 0
   m_Name: Attack3
   m_TagString: EnemyAttack
@@ -767,6 +869,20 @@ MonoBehaviour:
   isKnockback: 0
   isJuggle: 0
   isGuardBreak: 1
+--- !u!114 &1164784613204696584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7154178995390976147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8925f82d4e1b4f04aad4760c25b966d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snd: {fileID: 8965032500719624173}
+  sndClip: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
 --- !u!1 &7646903938889629086
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,6 +930,7 @@ GameObject:
   - component: {fileID: 8868853608525767498}
   - component: {fileID: 8214746434962946950}
   - component: {fileID: 4605219433780999912}
+  - component: {fileID: 6205283134243326591}
   m_Layer: 0
   m_Name: Attack2
   m_TagString: EnemyAttack
@@ -927,6 +1044,20 @@ MonoBehaviour:
   isKnockback: 0
   isJuggle: 0
   isGuardBreak: 0
+--- !u!114 &6205283134243326591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8817905105329169031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8925f82d4e1b4f04aad4760c25b966d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snd: {fileID: 8965032500719624173}
+  sndClip: {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
 --- !u!1 &9041318034838716345
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,6 +1071,7 @@ GameObject:
   - component: {fileID: 8278230982685967062}
   - component: {fileID: 2253644993552604267}
   - component: {fileID: 7053665331746838298}
+  - component: {fileID: 4209795897712591777}
   m_Layer: 0
   m_Name: Attack1
   m_TagString: EnemyAttack
@@ -1053,6 +1185,20 @@ MonoBehaviour:
   isKnockback: 0
   isJuggle: 0
   isGuardBreak: 0
+--- !u!114 &4209795897712591777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9041318034838716345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8925f82d4e1b4f04aad4760c25b966d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snd: {fileID: 8965032500719624173}
+  sndClip: {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
 --- !u!1001 &8470044410422132466
 PrefabInstance:
   m_ObjectHideFlags: 0

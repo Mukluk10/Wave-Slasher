@@ -37,7 +37,7 @@ public class EnemyMelee : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private bool isGrounded;
     private Rigidbody rb;
-    private Coroutine knockBackCoroutine;
+    [SerializeField] private GameObject splatEffect;
 
     private void Awake()
     {
@@ -210,6 +210,7 @@ public class EnemyMelee : MonoBehaviour
         isOTG = true;
         recoveryTime = knockBackTime;
         anim.SetTrigger("KnockDown");
+        Instantiate(splatEffect, groundCheck.position, splatEffect.transform.rotation);
         StopAllCoroutines();
         StartCoroutine(KnockDownState());
     }
