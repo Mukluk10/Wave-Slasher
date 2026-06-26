@@ -17,6 +17,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject bloodBig;
     [SerializeField] private GameObject bloodSmall;
 
+    [SerializeField] private GameObject sparkSmall;
+    [SerializeField] private Transform swordPos;
+
     private void Awake()
     {
         maxHealth = health;
@@ -50,6 +53,7 @@ public class PlayerHealth : MonoBehaviour
                 else
                 {
                     anim.SetTrigger("BlockStun");
+                    Instantiate(sparkSmall, swordPos.position, Quaternion.identity);
                     attakScript.recoveryTime = 0.2f;
 
                     attakScript.FindClosestEnemy();

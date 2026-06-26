@@ -27,6 +27,10 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private GameObject bloodBig;
     [SerializeField] private GameObject bloodSmall;
 
+    [SerializeField] private GameObject sparkBig;
+    [SerializeField] private GameObject sparkSmall;
+    [SerializeField] private Transform swordPos;
+
     private void Awake()
     {
         maxHealth = health;
@@ -71,12 +75,14 @@ public class EnemyHealth : MonoBehaviour
                     anim.ResetTrigger("Attack1");
                     anim.ResetTrigger("Attack2");
                     anim.ResetTrigger("Attack3");
+                    Instantiate(sparkBig, swordPos.position, Quaternion.identity);
                     enemyMelee.recoveryTime = 1f;
                 }
                 else
                 {
                     //Block
                     anim.SetTrigger("Block");
+                    Instantiate(sparkSmall, swordPos.position, Quaternion.identity);
                     blockStunDuration = 1f;
                 }
             }

@@ -13,6 +13,9 @@ public class PlayerBlock : MonoBehaviour
     public bool isBlocking;
 
     private Animator anim;
+
+    [SerializeField] private GameObject sparkBig;
+    [SerializeField] private Transform swordPos;
     public void OnBlock(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -62,6 +65,7 @@ public class PlayerBlock : MonoBehaviour
     public void GuardBreak()
     {
         anim.SetTrigger("BlockBreak");
+        Instantiate(sparkBig, swordPos.position, Quaternion.identity);
         isBlocking = false;
         attackScript.recoveryTime = 0.8f;
         StartCoroutine(BlockRecovery());
