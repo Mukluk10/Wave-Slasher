@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 968062186909847403}
   - component: {fileID: 272909970404096093}
   - component: {fileID: 6608969569195368231}
+  - component: {fileID: 1429874489029014370}
   - component: {fileID: 5377580132104361371}
   m_Layer: 7
   m_Name: EnemyAssassin
@@ -333,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a085d3c02cdb7419c3e3450d95d07c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 5
   inReadyDistance: 0
   readyToAttack: 0
   recoveryTime: 0
@@ -349,6 +350,8 @@ MonoBehaviour:
   attack1Recovery: 0.75
   attack2Recovery: 1
   attack3Recovery: 1
+  minTimeToAttack: 0.2
+  maxTimeToAttack: 1
   anim: {fileID: 6608969569195368231}
   groundCheck: {fileID: 3686559862294542445}
   groundLayer:
@@ -426,6 +429,52 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1429874489029014370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283122198143077251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad182d2e9d66e2e4eaadfd9e13446b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Method: 3
+  m_Curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.4979601
+      value: 1.0037937
+      inSlope: -0.004511448
+      outSlope: -0.004511448
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.43464887
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0041504
+      value: 0.0000038146973
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!54 &5377580132104361371
 Rigidbody:
   m_ObjectHideFlags: 0

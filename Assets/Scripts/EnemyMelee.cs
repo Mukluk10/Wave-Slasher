@@ -31,6 +31,9 @@ public class EnemyMelee : MonoBehaviour
     [SerializeField] private float attack2Recovery;
     [SerializeField] private float attack3Recovery;
 
+    [SerializeField] private float minTimeToAttack;
+    [SerializeField] private float maxTimeToAttack;
+
     [SerializeField] private Animator anim;
 
     [SerializeField] private Transform groundCheck;
@@ -180,7 +183,7 @@ public class EnemyMelee : MonoBehaviour
 
     private IEnumerator AttackTimeDivergence()
     {
-        float randomAttackTime = Random.Range(0.5f, 2f);
+        float randomAttackTime = Random.Range(minTimeToAttack, maxTimeToAttack);
         yield return new WaitForSeconds(randomAttackTime);
         GoingToAttack();
     }

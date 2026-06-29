@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -13,12 +15,17 @@ public class PlayerHealth : MonoBehaviour
 
     private float iFrameTime = 0.1f;
     private bool isInIframe;
+    private bool isDead;
 
     [SerializeField] private GameObject bloodBig;
     [SerializeField] private GameObject bloodSmall;
 
     [SerializeField] private GameObject sparkSmall;
     [SerializeField] private Transform swordPos;
+
+    [SerializeField] private Slider hPBar;
+
+    private PlayerInput input;
 
     private void Awake()
     {
@@ -27,11 +34,18 @@ public class PlayerHealth : MonoBehaviour
         attakScript = GetComponent<PlayerAttackScript>();
         blockScript = GetComponent<PlayerBlock>();
         anim = GetComponentInChildren<Animator>();
+        input = GetComponent<PlayerInput>();
+    }
+
+    private void Update()
+    {
+        if (health <= 0 && !isDead)
+            Die();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("EnemyAttack") && !isInIframe)
+        if (other.CompareTag("EnemyAttack") && !isInIframe && !isDead)
         {
             Hitbox hitBox = other.GetComponent<Hitbox>();
 
@@ -41,6 +55,7 @@ public class PlayerHealth : MonoBehaviour
                 Instantiate(bloodSmall, transform.position, Quaternion.identity);
                 anim.SetTrigger("Damage");
                 attakScript.recoveryTime = 0.2f;
+                hPBar.value = health;
                 isInIframe = true;
                 StartCoroutine(Invinciblity());
             }
@@ -64,6 +79,26 @@ public class PlayerHealth : MonoBehaviour
                 }
             }
         }
+
+        if (other.CompareTag("DeathBarrier"))
+            Die();
+    }
+
+    public void Heal()
+    {
+        health += 25;
+        hPBar.value = health;
+    }
+
+    public void Die()
+    {
+        isDead = true;
+        anim.SetTrigger("Death");
+        movementScript.enabled = false;
+        attakScript.enabled = false;
+        blockScript.enabled = false;
+        input.enabled = false;
+        this.enabled = false;
     }
 
     private IEnumerator Invinciblity()

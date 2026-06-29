@@ -29,14 +29,15 @@ public class PlayerMovement : MonoBehaviour
     private bool canEnemyStep;
     private bool isWalking;
 
-    
-
     public bool isGrounded;
     private bool isOnEnemy;
     public Vector3 moveDirection;
     public float verticalVelocity;
     public bool isDashing;
 
+    [SerializeField] private AudioSource jumpSound;
+    [SerializeField] private AudioSource dodgeSound;
+ 
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -141,18 +142,21 @@ public class PlayerMovement : MonoBehaviour
         anim.SetTrigger("Jump");
         verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
         blockScript.StopBlocking();
+        jumpSound.Play();
     }
 
     private void EnemyStep()
     {
         anim.SetTrigger("Jump");
         verticalVelocity = Mathf.Sqrt(enemyStepHeight * -2f * gravity);
+        jumpSound.Play();
     }
 
     private IEnumerator Dash()
     {
         isDashing = true;
         attakScript.recoveryTime = 0.4f;
+        dodgeSound.Play();
         blockScript.StopBlocking();
 
         float dashTime = dashDistance / dashSpeed;
