@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class WaveSystem : MonoBehaviour
@@ -19,6 +20,10 @@ public class WaveSystem : MonoBehaviour
 
     private bool spawningEnemy;
     private bool waveIsStarted;
+
+    [SerializeField] private Animator anim;
+    [SerializeField] private TextMeshProUGUI enemiesKilledText;
+    [SerializeField] private TextMeshProUGUI waveCountText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
@@ -52,11 +57,13 @@ public class WaveSystem : MonoBehaviour
         enemyCount += 3;
         enemiesKilled = 0;
         spawnedEnemies = 0;
+        anim.SetTrigger("Start");
         inDownTime = false;
     }
 
     private IEnumerator WaveDowntime()
     {
+        anim.SetTrigger("End");
         yield return new WaitForSeconds(timeBetweenWaves);
         WaveStart();
     }

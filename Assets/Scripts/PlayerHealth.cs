@@ -24,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Transform swordPos;
 
     [SerializeField] private Slider hPBar;
+    [SerializeField] private GameObject deathUI;
 
     private PlayerInput input;
 
@@ -98,6 +99,7 @@ public class PlayerHealth : MonoBehaviour
         attakScript.enabled = false;
         blockScript.enabled = false;
         input.enabled = false;
+        deathUI.SetActive(true);
         this.enabled = false;
     }
 
