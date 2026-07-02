@@ -22,7 +22,6 @@ public class WaveSystem : MonoBehaviour
     private bool waveIsStarted;
 
     [SerializeField] private Animator anim;
-    [SerializeField] private TextMeshProUGUI enemiesKilledText;
     [SerializeField] private TextMeshProUGUI waveCountText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -58,6 +57,7 @@ public class WaveSystem : MonoBehaviour
         enemiesKilled = 0;
         spawnedEnemies = 0;
         anim.SetTrigger("Start");
+        waveCountText.text = ("Made it to Wave  " + waveCount);
         inDownTime = false;
     }
 
