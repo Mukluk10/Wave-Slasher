@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIScript : MonoBehaviour
 {
@@ -10,5 +11,11 @@ public class UIScript : MonoBehaviour
     private void FixedUpdate()
     {
         enemiesKilledText.text = ("You Killed " + WaveSystem.Instance.totalEnemiesKilled + " Enemies");
+    }
+
+
+    public void ChangeScene(string scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 }

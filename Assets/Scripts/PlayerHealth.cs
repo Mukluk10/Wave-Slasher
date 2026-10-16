@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private Slider hPBar;
     [SerializeField] private GameObject deathUI;
+    [SerializeField] private string sceneToLoadOnDeath;
 
     private PlayerInput input;
 
@@ -100,6 +102,7 @@ public class PlayerHealth : MonoBehaviour
         blockScript.enabled = false;
         input.enabled = false;
         deathUI.SetActive(true);
+        StartCoroutine(DeathTime());
         this.enabled = false;
     }
 
@@ -107,5 +110,11 @@ public class PlayerHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(iFrameTime);
         isInIframe = false;
+    }
+
+    private IEnumerator DeathTime()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(sceneToLoadOnDeath);
     }
 }
