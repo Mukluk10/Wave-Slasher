@@ -146,6 +146,7 @@ public class EnemyHealth : MonoBehaviour
         col.enabled = false;
         agent.enabled = false;
         WaveSystem.Instance.enemiesKilled++;
+        WaveSystem.Instance.totalEnemiesKilled++;
         Instantiate(bloodBig, transform.position, Quaternion.identity);
         StartCoroutine(DeathFallTime());
         Destroy(gameObject, 60f);

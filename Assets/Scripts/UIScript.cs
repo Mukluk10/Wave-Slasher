@@ -9,6 +9,6 @@ public class UIScript : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        enemiesKilledText.text = ("You Killed " + WaveSystem.Instance.enemiesKilled + " Enemies");
+        enemiesKilledText.text = ("You Killed " + WaveSystem.Instance.totalEnemiesKilled + " Enemies");
     }
 }

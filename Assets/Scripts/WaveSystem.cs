@@ -11,6 +11,7 @@ public class WaveSystem : MonoBehaviour
 
     [SerializeField] private int enemyCount;
     public int enemiesKilled;
+    public int totalEnemiesKilled;
     [SerializeField] private int spawnedEnemies;
 
     [SerializeField] private int waveCount;
@@ -27,6 +28,7 @@ public class WaveSystem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
+        totalEnemiesKilled = 0;
         StartCoroutine(WaveDowntime());
         Instance = this; 
     }
@@ -57,6 +59,7 @@ public class WaveSystem : MonoBehaviour
         enemiesKilled = 0;
         spawnedEnemies = 0;
         anim.SetTrigger("Start");
+        MusicScript.instance.PlayRandomMusic();
         waveCountText.text = ("Made it to Wave  " + waveCount);
         inDownTime = false;
     }
